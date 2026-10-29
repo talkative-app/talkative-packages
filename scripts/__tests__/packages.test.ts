@@ -68,6 +68,7 @@ describe('packages', { skip: schemas === null ? 'talkative is not checked out' :
         name: 'talkative-packages',
         base: 'https://example.com/talkative-packages',
         folders: [example],
+        previews: new Map([['example-glass', ['previews/glass/server-channel-light.png']]]),
       }),
     );
     const [entry] = catalog?.packages ?? [];

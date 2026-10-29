@@ -2,7 +2,12 @@ import path from 'node:path';
 
 import { packageFiles } from './package-files.ts';
 
-export type CatalogInput = { name: string; base: string; folders: string[] };
+export type CatalogInput = {
+  name: string;
+  base: string;
+  folders: string[];
+  previews: Map<string, string[]>;
+};
 
 export class CatalogBuilder {
   readonly #releasedAt: (id: string) => string;
@@ -11,7 +16,7 @@ export class CatalogBuilder {
     this.#releasedAt = releasedAt;
   }
 
-  build({ name, base, folders }: CatalogInput): unknown {
+  build({ name, base, folders, previews }: CatalogInput): unknown {
     return {
       name,
       base,
@@ -22,7 +27,7 @@ export class CatalogBuilder {
           manifest: packageFiles.json(folder, 'manifest.json'),
           released: this.#releasedAt(id),
           files: packageFiles.list(folder),
-          previews: [],
+          previews: previews.get(id) ?? [],
         };
       }),
     };

@@ -72,6 +72,17 @@ A theme is plain CSS loaded after the app's own styles.
 - **Motion.** Stop animations under `:root[data-motion='reduced']` and
   `:root[data-performance='on']`.
 
+## Previews
+
+After a merge to `main`, `publish` shoots every changed theme in the real app: Server Channel,
+Direct Message and Call, in light and dark, 1280×800. The shots go to
+`packages/<id>/previews/<theme>/<screen>-<mode>.png` on Pages and into the catalog's `previews`;
+themes that did not change keep their published shots. Without a `cover.png` the first shot, the
+light Server Channel (dark for a dark-only theme), is the cover. Pull requests are never shot.
+
+The job runs on the runner named by the `PREVIEW_RUNNER` variable (`ubuntu-latest` when unset) and
+needs `TALKATIVE_READ_TOKEN`; without the token it is skipped with a notice.
+
 ## Run it locally
 
 Node 26. The check reads talkative's schemas from a `talkative` folder next to the packages:
