@@ -1,0 +1,8 @@
+{
+  "name": "Soft",
+  "sounds": {
+    "mention": "chime.ogg",
+    "direct-message": "chime.ogg",
+    "message-sent": "tap.ogg"
+  }
+}

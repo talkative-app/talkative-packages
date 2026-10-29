@@ -1,0 +1,11 @@
+{
+  "id": "example-glass",
+  "name": "Example Glass",
+  "version": "1.0.0",
+  "author": "talkative",
+  "licence": "CC0-1.0",
+  "description": "A small example: cool glass panels in dark and light, and two soft notification sounds. Copy this folder to start a package of your own.",
+  "talkative": ">=0.7",
+  "themes": ["glass"],
+  "sounds": ["soft"]
+}

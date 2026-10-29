@@ -1,0 +1,6 @@
+{
+  "name": "Glass",
+  "modes": ["dark", "light"],
+  "colors": ["#3a9fe0", "#0b1a2a", "#eaf6ff", "#34b36a"],
+  "css": "theme.css"
+}

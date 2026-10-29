@@ -1,0 +1,16 @@
+{
+  "name": "talkative-packages",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "check": "node scripts/check.ts",
+    "catalog": "node scripts/catalog.ts",
+    "test": "node --test scripts/__tests__/*.test.ts"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  }
+}

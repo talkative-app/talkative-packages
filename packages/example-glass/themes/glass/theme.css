@@ -1,0 +1,23 @@
+:root[data-theme='dark'] {
+  --tint-servers: #3a9fe0;
+  --tint-direct: #2bb3c0;
+  --color-canvas: #050d18;
+  --color-panel: #071322;
+  --color-surface: #0b1a2a;
+  --color-surface-raised: #10243a;
+  --color-field: #0d1f33;
+  --color-menu: #10243a;
+  --color-line: rgb(160 210 255 / 0.08);
+  --color-edge: rgb(160 210 255 / 0.18);
+}
+
+:root[data-theme='light'] {
+  --tint-servers: #1a7fc4;
+  --tint-direct: #138a96;
+  --color-canvas: #dcebf7;
+  --color-panel: #e6f2fb;
+  --color-surface: #f3f9fe;
+  --color-surface-raised: #ffffff;
+  --color-field: #e9f3fb;
+  --color-line: rgb(20 70 120 / 0.1);
+}
