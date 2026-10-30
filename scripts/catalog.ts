@@ -3,7 +3,6 @@ import path from 'node:path';
 
 import { CatalogBuilder } from './lib/catalog-builder.ts';
 import { gitHistory } from './lib/git-history.ts';
-import { schemaLoader } from './lib/talkative-schemas.ts';
 
 const root = path.resolve(import.meta.dirname, '..');
 const dist = path.join(root, 'dist');
@@ -27,8 +26,5 @@ const catalog = new CatalogBuilder((id) => gitHistory.releasedAt(id)).build({
   base,
   folders,
 });
-const schemas = await schemaLoader.load();
-const checked = schemas === null ? catalog : schemas.catalogSchema.parse(catalog);
-
-writeFileSync(path.join(dist, 'catalog.json'), `${JSON.stringify(checked, null, 2)}\n`);
+writeFileSync(path.join(dist, 'catalog.json'), `${JSON.stringify(catalog, null, 2)}\n`);
 console.log(`catalog.json lists ${String(folders.length)} packages under ${base}`);

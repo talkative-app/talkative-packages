@@ -22,8 +22,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
-    env:
-      READ_TOKEN: ${{ secrets.TALKATIVE_READ_TOKEN }}
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -34,13 +32,7 @@ jobs:
           node-version: 26
           cache: npm
       - run: npm ci
-      - if: env.READ_TOKEN != ''
-        uses: ./.github/actions/talkative
-        with:
-          token: ${{ secrets.TALKATIVE_READ_TOKEN }}
-          ref: ${{ vars.TALKATIVE_REF }}
-      - if: env.READ_TOKEN != ''
-        run: npm run check
+      - run: npm run check
       - id: pages
         uses: actions/configure-pages@v6.0.0
       - run: npm run catalog

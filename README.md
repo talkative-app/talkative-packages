@@ -101,11 +101,11 @@ A theme is plain CSS loaded after the app's own styles.
 
 ## Run it locally
 
-Node 26. The check reads talkative's schemas from a `talkative` folder next to the packages:
+Node 26. The check follows the rules in `schema/`: `manifest.schema.json` (the manifest as JSON
+Schema) and `rules.json` (file names, size and sound lengths). Every talkative release writes them
+here, so they always match the newest app.
 
 ```sh
-git clone https://github.com/talkative-app/talkative ../talkative
-ln -s ../talkative talkative
 npm ci
 npm run check
 npm test
@@ -115,6 +115,5 @@ npm run catalog
 ## Your own repository
 
 A copy made with **Use this template** publishes its catalog to its own Pages address (Settings →
-Pages → Source: GitHub Actions); add that address in the app with Add Repository…. The check needs
-a `TALKATIVE_READ_TOKEN` secret that can read talkative; without it the check is skipped and the
-catalog still publishes.
+Pages → Source: GitHub Actions); add that address in the app with Add Repository…. Its `schema/` stays as it was copied; copy the
+folder from this repository again to follow a newer talkative.

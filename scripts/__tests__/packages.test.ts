@@ -9,24 +9,20 @@ import { describe, it } from 'node:test';
 import { CatalogBuilder } from '../lib/catalog-builder.ts';
 import { GitHistory } from '../lib/git-history.ts';
 import { PackageChecker } from '../lib/package-checker.ts';
-import { schemaLoader } from '../lib/talkative-schemas.ts';
+import { PackageRules } from '../lib/package-rules.ts';
 import { versionBump } from '../lib/version-bump.ts';
 
 const example = path.resolve(import.meta.dirname, '../../packages/example-glass');
-const schemas = await schemaLoader.load();
+const rules = new PackageRules();
 
-describe('packages', { skip: schemas === null ? 'talkative is not checked out' : false }, () => {
+describe('packages', () => {
   const copy = (): string => {
     const folder = path.join(mkdtempSync(path.join(tmpdir(), 'package-')), 'example-glass');
     cpSync(example, folder, { recursive: true });
 
     return folder;
   };
-  const checker = (): PackageChecker => {
-    if (schemas === null) throw new Error('talkative is not checked out');
-
-    return new PackageChecker(schemas);
-  };
+  const checker = (): PackageChecker => new PackageChecker(rules);
   const manifestOf = (folder: string): Record<string, unknown> =>
     JSON.parse(readFileSync(path.join(folder, 'manifest.json'), 'utf8'));
 
@@ -93,15 +89,27 @@ describe('packages', { skip: schemas === null ? 'talkative is not checked out' :
     assert.match(problems, /previews\/extra\.png is not part of any listed item/);
   });
 
-  it('The catalog lists every file with the hash and size of its bytes', () => {
-    const catalog = schemas?.catalogSchema.parse(
-      new CatalogBuilder(() => '2026-10-29T12:00:00+01:00').build({
-        name: 'talkative-packages',
-        base: 'https://example.com/talkative-packages',
-        folders: [example],
-      }),
+  it('A package with no theme or sound pack is refused', () => {
+    const folder = copy();
+    writeFileSync(
+      path.join(folder, 'manifest.json'),
+      JSON.stringify({ ...manifestOf(folder), contents: {} }),
     );
-    const [entry] = catalog?.packages ?? [];
+    assert.match(checker().problems(folder).join('\n'), /holds no theme or sound pack/);
+  });
+
+  it('The catalog lists every file with the hash and size of its bytes', () => {
+    const catalog = new CatalogBuilder(() => '2026-10-29T12:00:00+01:00').build({
+      name: 'talkative-packages',
+      base: 'https://example.com/talkative-packages',
+      folders: [example],
+    }) as {
+      packages: {
+        manifest: { id: string };
+        files: { path: string; sha256: string; bytes: number }[];
+      }[];
+    };
+    const [entry] = catalog.packages;
     const chime = entry?.files.find((file) => file.path === 'sounds/soft/chime.ogg');
     const bytes = readFileSync(path.join(example, 'sounds/soft/chime.ogg'));
 
