@@ -6,7 +6,6 @@ export type CatalogInput = {
   name: string;
   base: string;
   folders: string[];
-  previews: Map<string, string[]>;
 };
 
 export class CatalogBuilder {
@@ -16,7 +15,7 @@ export class CatalogBuilder {
     this.#releasedAt = releasedAt;
   }
 
-  build({ name, base, folders, previews }: CatalogInput): unknown {
+  build({ name, base, folders }: CatalogInput): unknown {
     return {
       name,
       base,
@@ -27,7 +26,6 @@ export class CatalogBuilder {
           manifest: packageFiles.json(folder, 'manifest.json'),
           released: this.#releasedAt(id),
           files: packageFiles.list(folder),
-          previews: previews.get(id) ?? [],
         };
       }),
     };

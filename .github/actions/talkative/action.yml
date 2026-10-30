@@ -8,10 +8,6 @@ inputs:
     description: The branch or tag; empty means the newest release.
     required: false
     default: ''
-  sparse:
-    description: The folders to check out; empty means all of them.
-    required: false
-    default: packages/schemas
 runs:
   using: composite
   steps:
@@ -27,5 +23,5 @@ runs:
         ref: ${{ steps.ref.outputs.ref }}
         path: talkative
         token: ${{ inputs.token }}
-        sparse-checkout: ${{ inputs.sparse }}
+        sparse-checkout: packages/schemas
         persist-credentials: false

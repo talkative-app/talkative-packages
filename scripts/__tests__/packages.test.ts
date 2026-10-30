@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { cpSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { describe, it } from 'node:test';
@@ -53,13 +53,44 @@ describe('packages', { skip: schemas === null ? 'talkative is not checked out' :
   it('A sound that is not an ogg file or is missing is refused', () => {
     const folder = copy();
     writeFileSync(path.join(folder, 'sounds/soft/chime.ogg'), 'not audio');
+    const manifest = manifestOf(folder);
     writeFileSync(
-      path.join(folder, 'sounds/soft/pack.json'),
-      JSON.stringify({ name: 'Soft', sounds: { mention: 'chime.ogg', 'ring-in': 'ring.ogg' } }),
+      path.join(folder, 'manifest.json'),
+      JSON.stringify({
+        ...manifest,
+        contents: {
+          ...(manifest['contents'] as object),
+          sounds: {
+            soft: { name: 'Soft', sounds: { mention: 'chime.ogg', 'ring-in': 'ring.ogg' } },
+          },
+        },
+      }),
     );
     const problems = checker().problems(folder).join('\n');
     assert.match(problems, /chime\.ogg is not a readable ogg file/);
     assert.match(problems, /ring\.ogg is missing/);
+  });
+
+  it('A preview is a listed picture, and a picture nobody lists is a stray', () => {
+    const folder = copy();
+    writeFileSync(
+      path.join(folder, 'manifest.json'),
+      JSON.stringify({
+        ...manifestOf(folder),
+        previews: [{ file: 'previews/channel-dark.png', title: 'Server channel, dark' }],
+      }),
+    );
+    assert.match(checker().problems(folder).join('\n'), /previews\/channel-dark\.png is missing/);
+
+    mkdirSync(path.join(folder, 'previews'));
+    cpSync(
+      path.join(folder, 'sounds/soft/tap.ogg'),
+      path.join(folder, 'previews/channel-dark.png'),
+    );
+    writeFileSync(path.join(folder, 'previews/extra.png'), 'png');
+    const problems = checker().problems(folder).join('\n');
+    assert.doesNotMatch(problems, /channel-dark\.png/);
+    assert.match(problems, /previews\/extra\.png is not part of any listed item/);
   });
 
   it('The catalog lists every file with the hash and size of its bytes', () => {
@@ -68,7 +99,6 @@ describe('packages', { skip: schemas === null ? 'talkative is not checked out' :
         name: 'talkative-packages',
         base: 'https://example.com/talkative-packages',
         folders: [example],
-        previews: new Map([['example-glass', ['previews/glass/server-channel-light.png']]]),
       }),
     );
     const [entry] = catalog?.packages ?? [];

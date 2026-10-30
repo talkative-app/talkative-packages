@@ -3,6 +3,9 @@ import path from 'node:path';
 
 export type TalkativeSchemas = typeof import('../../talkative/packages/schemas/src/index.ts');
 
+export type PackageManifest =
+  import('../../talkative/packages/schemas/src/index.ts').PackageManifest;
+
 export const TALKATIVE_SCHEMAS = path.resolve(
   import.meta.dirname,
   '../../talkative/packages/schemas/src/index.ts',
