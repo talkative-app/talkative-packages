@@ -1,0 +1,16 @@
+{
+  "manifestFile": "manifest.json",
+  "cover": "cover.png",
+  "themeFile": "theme.css",
+  "bytes": 5242880,
+  "soundSeconds": 10,
+  "clickSeconds": 1,
+  "longEvents": ["ring-in", "ring-out"],
+  "clickEvents": ["click", "button-click"],
+  "filePath": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "string",
+    "maxLength": 256,
+    "pattern": "^(?:[A-Za-z0-9_-][A-Za-z0-9._-]*)(?:\\/[A-Za-z0-9_-][A-Za-z0-9._-]*)*$"
+  }
+}

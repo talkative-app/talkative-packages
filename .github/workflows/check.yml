@@ -8,9 +8,7 @@ permissions:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
-    env:
-      READ_TOKEN: ${{ secrets.TALKATIVE_READ_TOKEN }}
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -21,16 +19,7 @@ jobs:
           node-version: 26
           cache: npm
       - run: npm ci
-      - if: env.READ_TOKEN == ''
-        run: echo "::notice::TALKATIVE_READ_TOKEN is not set, so packages are not checked."
-      - if: env.READ_TOKEN != ''
-        uses: ./.github/actions/talkative
-        with:
-          token: ${{ secrets.TALKATIVE_READ_TOKEN }}
-          ref: ${{ vars.TALKATIVE_REF }}
-      - if: env.READ_TOKEN != ''
-        run: npm test
-      - if: env.READ_TOKEN != ''
-        run: npm run check
+      - run: npm test
+      - run: npm run check
         env:
           BASE_REF: origin/${{ github.base_ref }}

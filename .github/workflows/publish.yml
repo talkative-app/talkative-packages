@@ -13,62 +13,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  previews:
-    runs-on: ${{ vars.PREVIEW_RUNNER || 'ubuntu-latest' }}
-    env:
-      READ_TOKEN: ${{ secrets.TALKATIVE_READ_TOKEN }}
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      - uses: actions/setup-node@v7.1.0
-        with:
-          node-version: 26
-      - id: themes
-        env:
-          BEFORE: ${{ github.event_name == 'push' && github.event.before || '' }}
-        run: echo "list=$(node scripts/changed-themes.ts)" >> "$GITHUB_OUTPUT"
-      - if: env.READ_TOKEN == ''
-        run: echo "::notice::TALKATIVE_READ_TOKEN is not set, so no theme previews are shot."
-      - if: env.READ_TOKEN == '' || steps.themes.outputs.list == ''
-        run: echo "::notice::No theme previews to shoot."
-      - if: env.READ_TOKEN != '' && steps.themes.outputs.list != ''
-        uses: ./.github/actions/talkative
-        with:
-          token: ${{ secrets.TALKATIVE_READ_TOKEN }}
-          ref: ${{ vars.TALKATIVE_REF }}
-          sparse: ''
-      - if: env.READ_TOKEN != '' && steps.themes.outputs.list != ''
-        working-directory: talkative
-        run: |
-          npm ci
-          npm run build --workspace @talkative/server
-          npm run package --workspace @talkative/desktop
-      - if: env.READ_TOKEN != '' && steps.themes.outputs.list != ''
-        working-directory: talkative/apps/desktop
-        env:
-          THEMES: ${{ steps.themes.outputs.list }}
-        run: |
-          for theme in $THEMES; do
-            TALKATIVE_THEME_FOLDER="$GITHUB_WORKSPACE/packages/${theme%%/*}" \
-            TALKATIVE_THEME_ITEM="${theme#*/}" \
-            TALKATIVE_THEME_SHOTS="$GITHUB_WORKSPACE/shots/$theme" \
-              xvfb-run -a npx playwright test -c playwright.look.config.ts e2e/look/theme.look.ts
-          done
-      - if: always()
-        run: docker rm --force talkative-e2e-livekit || true
-      - if: env.READ_TOKEN != '' && steps.themes.outputs.list != ''
-        uses: actions/upload-artifact@v7.0.2
-        with:
-          name: shots
-          path: shots
-          retention-days: 1
-
   publish:
-    needs: previews
-    if: always()
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       pages: write
@@ -76,8 +22,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
-    env:
-      READ_TOKEN: ${{ secrets.TALKATIVE_READ_TOKEN }}
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -88,19 +32,7 @@ jobs:
           node-version: 26
           cache: npm
       - run: npm ci
-      - if: env.READ_TOKEN != ''
-        uses: ./.github/actions/talkative
-        with:
-          token: ${{ secrets.TALKATIVE_READ_TOKEN }}
-          ref: ${{ vars.TALKATIVE_REF }}
-      - if: env.READ_TOKEN != ''
-        run: npm run check
-      - if: needs.previews.result == 'success'
-        uses: actions/download-artifact@v8.0.2
-        continue-on-error: true
-        with:
-          name: shots
-          path: shots
+      - run: npm run check
       - id: pages
         uses: actions/configure-pages@v6.0.0
       - run: npm run catalog

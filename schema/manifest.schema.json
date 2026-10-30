@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{1,64}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "\\S"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "\\S"
+    },
+    "licence": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "\\S"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400,
+      "pattern": "\\S"
+    },
+    "talkative": {
+      "type": "string",
+      "pattern": "^(?:(?:[<>]=?|[=^~])?\\d+(?:\\.\\d+){0,2})(?: (?:[<>]=?|[=^~])?\\d+(?:\\.\\d+){0,2})*$"
+    },
+    "contents": {
+      "type": "object",
+      "properties": {
+        "themes": {
+          "default": {},
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]{1,64}$"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "\\S"
+              },
+              "modes": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["dark", "light"]
+                }
+              },
+              "colors": {
+                "minItems": 1,
+                "maxItems": 4,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^#[0-9a-fA-F]{6}$"
+                }
+              }
+            },
+            "required": ["name", "modes", "colors"]
+          }
+        },
+        "sounds": {
+          "default": {},
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]{1,64}$"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "\\S"
+              },
+              "sounds": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "enum": [
+                    "mute",
+                    "unmute",
+                    "deafen",
+                    "undeafen",
+                    "camera-on",
+                    "camera-off",
+                    "stream-watch",
+                    "stream-viewer-join",
+                    "stream-viewer-leave",
+                    "ring-out",
+                    "ring-in",
+                    "channel-join",
+                    "channel-leave",
+                    "self-join",
+                    "self-leave",
+                    "stream-start",
+                    "stream-end",
+                    "call-end",
+                    "call-declined",
+                    "connection-lost",
+                    "connection-back",
+                    "message",
+                    "mention",
+                    "direct-message",
+                    "message-sent",
+                    "app-start",
+                    "welcome",
+                    "click",
+                    "button-click"
+                  ]
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9_-]{1,64}\\.ogg$"
+                }
+              }
+            },
+            "required": ["name", "sounds"]
+          }
+        }
+      }
+    },
+    "previews": {
+      "default": [],
+      "maxItems": 8,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "maxLength": 256,
+            "allOf": [
+              {
+                "pattern": "^(?:[A-Za-z0-9_-][A-Za-z0-9._-]*)(?:\\/[A-Za-z0-9_-][A-Za-z0-9._-]*)*$"
+              },
+              {
+                "pattern": "\\.(?:png|jpe?g|webp)$"
+              }
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "\\S"
+          }
+        },
+        "required": ["file", "title"]
+      }
+    }
+  },
+  "required": ["id", "name", "version", "author", "description", "talkative", "contents"]
+}

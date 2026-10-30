@@ -1,116 +1,105 @@
 import path from 'node:path';
 
-import { z, type ZodType } from 'zod';
-
+import { oggDuration } from './ogg-duration.ts';
 import { packageFiles, type PackageFile } from './package-files.ts';
-import type { TalkativeSchemas } from './talkative-schemas.ts';
+import type { PackageManifest, PackageRules } from './package-rules.ts';
 
 export class PackageChecker {
-  readonly #schemas: TalkativeSchemas;
+  readonly #rules: PackageRules;
 
-  constructor(schemas: TalkativeSchemas) {
-    this.#schemas = schemas;
+  constructor(rules: PackageRules) {
+    this.#rules = rules;
   }
 
   problems(folder: string): string[] {
     const files = packageFiles.list(folder);
-    const manifest = this.#parse(
-      this.#schemas.packageManifestSchema,
-      folder,
-      'manifest.json',
-      files,
-    );
-    if (typeof manifest === 'string') return [manifest];
+    const manifest = this.#manifest(folder, files);
+    if (Array.isArray(manifest)) return manifest;
 
+    const { manifestFile, cover } = this.#rules.rules;
     const id = path.basename(folder);
-    const owned = new Set([
-      'manifest.json',
-      ...(manifest.cover === undefined ? [] : [manifest.cover]),
-    ]);
-    const problems = [
-      ...(manifest.id === id ? [] : [`The folder is ${id} but the manifest id is ${manifest.id}.`]),
-      ...files.flatMap((file) => this.#pathProblems(file)),
-      ...this.#sizeProblems(files),
-      ...(manifest.cover === undefined || this.#has(files, manifest.cover)
-        ? []
-        : [`The cover ${manifest.cover} is missing.`]),
-      ...manifest.themes.flatMap((theme) => this.#themeProblems(folder, files, theme)),
-      ...manifest.sounds.flatMap((pack) => this.#soundProblems(folder, files, pack)),
-    ];
+    const themes = Object.keys(manifest.contents.themes ?? {});
+    const packs = Object.entries(manifest.contents.sounds ?? {});
+    const previews = (manifest.previews ?? []).map((preview) => preview.file);
+    const owned = new Set([manifestFile, cover, ...previews]);
     const items = [
-      ...manifest.themes.map((theme) => `themes/${theme}/`),
-      ...manifest.sounds.map((pack) => `sounds/${pack}/`),
+      ...themes.map((theme) => `themes/${theme}/`),
+      ...packs.map(([pack]) => `sounds/${pack}/`),
     ];
     const strays = files.filter(
       (file) => !owned.has(file.path) && !items.some((item) => file.path.startsWith(item)),
     );
 
-    return [...problems, ...strays.map((file) => `${file.path} is not part of any listed item.`)];
+    return [
+      ...(manifest.id === id ? [] : [`The folder is ${id} but the manifest id is ${manifest.id}.`]),
+      ...(themes.length + packs.length > 0 ? [] : ['The package holds no theme or sound pack.']),
+      ...packs
+        .filter(([, pack]) => Object.keys(pack.sounds).length === 0)
+        .map(([pack]) => `The sound pack ${pack} has no sounds.`),
+      ...files
+        .filter((file) => !this.#rules.allowedPath(file.path))
+        .map((file) => `${file.path} is not an allowed file name.`),
+      ...this.#sizeProblems(files),
+      ...this.#named(manifest)
+        .filter((relative) => !this.#has(files, relative))
+        .map((relative) => `${relative} is missing.`),
+      ...this.#soundProblems(folder, files, manifest),
+      ...strays.map((file) => `${file.path} is not part of any listed item.`),
+    ];
   }
 
-  #themeProblems(folder: string, files: PackageFile[], theme: string): string[] {
-    const item = this.#parse(
-      this.#schemas.themeItemSchema,
-      folder,
-      `themes/${theme}/theme.json`,
-      files,
+  #named(manifest: PackageManifest): string[] {
+    return [
+      ...Object.keys(manifest.contents.themes ?? {}).map(
+        (theme) => `themes/${theme}/${this.#rules.rules.themeFile}`,
+      ),
+      ...Object.entries(manifest.contents.sounds ?? {}).flatMap(([pack, item]) =>
+        Object.values(item.sounds).map((file) => `sounds/${pack}/${file}`),
+      ),
+      ...(manifest.previews ?? []).map((preview) => preview.file),
+    ];
+  }
+
+  #soundProblems(folder: string, files: PackageFile[], manifest: PackageManifest): string[] {
+    return Object.entries(manifest.contents.sounds ?? {}).flatMap(([pack, item]) =>
+      Object.entries(item.sounds).flatMap(([event, file]) => {
+        const relative = `sounds/${pack}/${file}`;
+        if (!this.#has(files, relative)) return [];
+
+        const seconds = oggDuration.seconds(packageFiles.read(folder, relative));
+        if (seconds === null) return [`${relative} is not a readable ogg file.`];
+
+        const limit = oggDuration.limit(this.#rules.rules, event);
+
+        return limit !== null && seconds > limit
+          ? [
+              `${relative} lasts ${seconds.toFixed(1)} s; ${event} sounds are at most ${String(limit)} s.`,
+            ]
+          : [];
+      }),
     );
-    if (typeof item === 'string') return [item];
-
-    return this.#has(files, `themes/${theme}/${item.css}`)
-      ? []
-      : [`themes/${theme}/${item.css} is missing.`];
-  }
-
-  #soundProblems(folder: string, files: PackageFile[], pack: string): string[] {
-    const item = this.#parse(
-      this.#schemas.soundItemSchema,
-      folder,
-      `sounds/${pack}/pack.json`,
-      files,
-    );
-    if (typeof item === 'string') return [item];
-
-    return Object.entries(item.sounds).flatMap(([event, file]) => {
-      const relative = `sounds/${pack}/${String(file)}`;
-      if (!this.#has(files, relative)) return [`${relative} is missing.`];
-
-      const seconds = this.#schemas.oggDuration.seconds(packageFiles.read(folder, relative));
-      if (seconds === null) return [`${relative} is not a readable ogg file.`];
-
-      return this.#schemas.oggDuration.tooLong(this.#schemas.soundEventSchema.parse(event), seconds)
-        ? [
-            `${relative} lasts ${seconds.toFixed(1)} s; sounds are at most ${String(this.#schemas.PACKAGE_LIMITS.soundSeconds)} s.`,
-          ]
-        : [];
-    });
-  }
-
-  #pathProblems(file: PackageFile): string[] {
-    return this.#schemas.packagePathSchema.safeParse(file.path).success
-      ? []
-      : [`${file.path} is not an allowed file name.`];
   }
 
   #sizeProblems(files: PackageFile[]): string[] {
     const bytes = files.reduce((sum, file) => sum + file.bytes, 0);
+    const most = this.#rules.rules.bytes;
 
-    return bytes <= this.#schemas.PACKAGE_LIMITS.bytes
+    return bytes <= most
       ? []
-      : [`The package is ${(bytes / 1024 / 1024).toFixed(1)} MB; packages are at most 5 MB.`];
+      : [
+          `The package is ${(bytes / 1024 / 1024).toFixed(1)} MB; packages are at most ${String(most / 1024 / 1024)} MB.`,
+        ];
   }
 
-  #parse<T>(
-    schema: ZodType<T>,
-    folder: string,
-    relative: string,
-    files: PackageFile[],
-  ): T | string {
-    if (!this.#has(files, relative)) return `${relative} is missing.`;
+  #manifest(folder: string, files: PackageFile[]): PackageManifest | string[] {
+    const relative = this.#rules.rules.manifestFile;
+    if (!this.#has(files, relative)) return [`${relative} is missing.`];
 
-    const parsed = schema.safeParse(this.#json(folder, relative));
+    const manifest = this.#rules.manifest(this.#json(folder, relative));
 
-    return parsed.success ? parsed.data : `${relative}: ${z.prettifyError(parsed.error)}`;
+    return Array.isArray(manifest)
+      ? manifest.map((problem) => `${relative}: ${problem}`)
+      : manifest;
   }
 
   #json(folder: string, relative: string): unknown {
