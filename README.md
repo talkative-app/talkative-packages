@@ -65,12 +65,15 @@ Sound events: `mute`, `unmute`, `deafen`, `undeafen`, `camera-on`, `camera-off`,
 `stream-viewer-join`, `stream-viewer-leave`, `ring-out`, `ring-in`, `channel-join`,
 `channel-leave`, `self-join`, `self-leave`, `stream-start`, `stream-end`, `call-end`,
 `call-declined`, `connection-lost`, `connection-back`, `message`, `mention`, `direct-message`,
-`message-sent`, `app-start`. A pack may leave events out.
+`message-sent`, `app-start`, and three only packs bring: `welcome` (the sign-in screen opens
+into the app), `button-click` (a button) and `click` (anything else clickable, and buttons when the
+pack has no `button-click`). A pack may leave events out.
 
 ## Limits
 
 - A package is at most 5 MB.
-- Sounds are `.ogg`, at most 10 s, except `ring-in` and `ring-out`.
+- Sounds are `.ogg`, at most 10 s, except `ring-in` and `ring-out`; `click` and `button-click` at
+  most 1 s.
 - Every file is the manifest, the cover, a listed preview or part of a listed theme or sound pack;
   no hidden files. Every file the manifest names must exist.
 
