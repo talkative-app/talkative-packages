@@ -12,12 +12,12 @@ import { PackageChecker } from '../lib/package-checker.ts';
 import { PackageRules } from '../lib/package-rules.ts';
 import { versionBump } from '../lib/version-bump.ts';
 
-const example = path.resolve(import.meta.dirname, '../../packages/example-glass');
+const example = path.resolve(import.meta.dirname, '../../packages/example');
 const rules = new PackageRules();
 
 describe('packages', () => {
-  const copy = (): string => {
-    const folder = path.join(mkdtempSync(path.join(tmpdir(), 'package-')), 'example-glass');
+  const copy = (id = 'example'): string => {
+    const folder = path.join(mkdtempSync(path.join(tmpdir(), 'package-')), id);
     cpSync(example, folder, { recursive: true });
 
     return folder;
@@ -40,7 +40,7 @@ describe('packages', () => {
 
     const fresh = copy();
     writeFileSync(path.join(fresh, 'notes.txt'), 'Jane Doe was here');
-    writeFileSync(path.join(fresh, 'themes/glass/.DS_Store'), '');
+    writeFileSync(path.join(fresh, 'themes/example/.DS_Store'), '');
     const problems = checker().problems(fresh).join('\n');
     assert.match(problems, /notes\.txt is not part of any listed item/);
     assert.match(problems, /\.DS_Store is not an allowed file name/);
@@ -48,7 +48,7 @@ describe('packages', () => {
 
   it('A sound that is not an ogg file or is missing is refused', () => {
     const folder = copy();
-    writeFileSync(path.join(folder, 'sounds/soft/chime.ogg'), 'not audio');
+    writeFileSync(path.join(folder, 'sounds/example/chime.ogg'), 'not audio');
     const manifest = manifestOf(folder);
     writeFileSync(
       path.join(folder, 'manifest.json'),
@@ -57,7 +57,10 @@ describe('packages', () => {
         contents: {
           ...(manifest['contents'] as object),
           sounds: {
-            soft: { name: 'Soft', sounds: { mention: 'chime.ogg', 'ring-in': 'ring.ogg' } },
+            example: {
+              name: 'Example Sounds',
+              sounds: { mention: 'chime.ogg', 'ring-in': 'ring.ogg' },
+            },
           },
         },
       }),
@@ -80,7 +83,7 @@ describe('packages', () => {
 
     mkdirSync(path.join(folder, 'previews'));
     cpSync(
-      path.join(folder, 'sounds/soft/tap.ogg'),
+      path.join(folder, 'sounds/example/tap.ogg'),
       path.join(folder, 'previews/channel-dark.png'),
     );
     writeFileSync(path.join(folder, 'previews/extra.png'), 'png');
@@ -98,22 +101,28 @@ describe('packages', () => {
     assert.match(checker().problems(folder).join('\n'), /holds no theme or sound pack/);
   });
 
-  it('The catalog lists every file with the hash and size of its bytes', () => {
+  it('The catalog lists every file with the hash and size of its bytes, and leaves the example out', () => {
+    const doe = copy('doe-glass');
+    writeFileSync(
+      path.join(doe, 'manifest.json'),
+      JSON.stringify({ ...manifestOf(doe), id: 'doe-glass' }),
+    );
     const catalog = new CatalogBuilder(() => '2026-10-29T12:00:00+01:00').build({
       name: 'talkative-packages',
       base: 'https://example.com/talkative-packages',
-      folders: [example],
+      folders: [example, doe],
     }) as {
       packages: {
         manifest: { id: string };
         files: { path: string; sha256: string; bytes: number }[];
       }[];
     };
+    assert.equal(catalog.packages.length, 1);
     const [entry] = catalog.packages;
-    const chime = entry?.files.find((file) => file.path === 'sounds/soft/chime.ogg');
-    const bytes = readFileSync(path.join(example, 'sounds/soft/chime.ogg'));
+    const chime = entry?.files.find((file) => file.path === 'sounds/example/chime.ogg');
+    const bytes = readFileSync(path.join(example, 'sounds/example/chime.ogg'));
 
-    assert.equal(entry?.manifest.id, 'example-glass');
+    assert.equal(entry?.manifest.id, 'doe-glass');
     assert.equal(chime?.sha256, createHash('sha256').update(bytes).digest('hex'));
     assert.equal(chime?.bytes, bytes.byteLength);
   });

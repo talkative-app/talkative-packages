@@ -6,7 +6,8 @@ Settings → Packages. This repository is the official one; anyone can start the
 
 ## Add a package
 
-1. Copy `packages/example-glass` to `packages/<your-id>` and edit it.
+1. Copy `packages/example` to `packages/<your-id>` and edit it. The example shows everything a
+   package can do; it is checked like any package but never published.
 2. Open a pull request. The `check` job tests the package; the maintainer reviews it.
 3. Once merged, `publish` puts it in `catalog.json` on this repository's Pages address.
 
@@ -27,9 +28,10 @@ packages/<id>/
 
 ```json
 {
-  "id": "example-glass",
-  "name": "Example Glass",
-  "author": "talkative",
+  "$schema": "../../schema/manifest.schema.json",
+  "id": "doe-glass",
+  "name": "Doe Glass",
+  "author": "Jane Doe",
   "version": "1.0.0",
   "licence": "CC0-1.0",
   "description": "Cool glass panels and two soft sounds.",
@@ -48,6 +50,7 @@ packages/<id>/
 
 | Field             |                                                                                                                                                         |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `$schema`         | optional; with it your editor completes and checks the manifest                                                                                         |
 | `id`              | the folder name: lower case letters, digits and `-`                                                                                                     |
 | `name`, `author`  | up to 64 characters each                                                                                                                                |
 | `version`         | `major.minor.patch`                                                                                                                                     |
@@ -94,7 +97,7 @@ A theme is plain CSS loaded after the app's own styles.
   `member-list`, `user-panel`, `message`, `mention`, `composer`, `avatar`, `presence-dot`, `menu`,
   `dialog`, `button-primary`, `field`. Select them as `[data-part='composer']`. Any other selector
   works at your own risk and may break with an update.
-- **Files.** Use only files from your own package: `url('./glass.png')` resolves next to
+- **Files.** Use only files from your own package: `url('./frost.svg')` resolves next to
   `theme.css`, and `data:` URLs work. Remote images, fonts and connections are blocked.
 - **Motion.** Stop animations under `:root[data-motion='reduced']` and
   `:root[data-performance='on']`.

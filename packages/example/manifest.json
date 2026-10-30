@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schema/manifest.schema.json",
+  "id": "example",
+  "name": "Example Package",
+  "version": "1.0.0",
+  "author": "talkative",
+  "licence": "CC0-1.0",
+  "description": "The example package: a theme in dark and light that restyles tokens and parts, loads its own picture and respects reduced motion, and a sound pack with a welcome, clicks and notifications. Copy this folder to start your own. It is not published.",
+  "talkative": ">=0.7",
+  "contents": {
+    "themes": {
+      "example": {
+        "name": "Example Theme",
+        "modes": ["dark", "light"],
+        "colors": ["#3a9fe0", "#0b1a2a", "#eaf6ff", "#2bb3c0"]
+      }
+    },
+    "sounds": {
+      "example": {
+        "name": "Example Sounds",
+        "sounds": {
+          "welcome": "welcome.ogg",
+          "button-click": "button.ogg",
+          "click": "click.ogg",
+          "mention": "chime.ogg",
+          "direct-message": "chime.ogg",
+          "message-sent": "tap.ogg"
+        }
+      }
+    }
+  },
+  "previews": []
+}

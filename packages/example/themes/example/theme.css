@@ -1,0 +1,109 @@
+/* Example Theme: every technique a theme can use, in one file. */
+
+/* 1. Tokens, per mode. Each mode listed in the manifest gets its own block. */
+:root[data-theme='dark'] {
+  --tint-servers: #3a9fe0;
+  --tint-direct: #2bb3c0;
+  --tint-call: #34b36a;
+  --color-canvas: #050d18;
+  --color-panel: #071322;
+  --color-surface: #0b1a2a;
+  --color-surface-raised: #10243a;
+  --color-card: #0e2034;
+  --color-field: #0d1f33;
+  --color-menu: rgb(16 36 58 / 0.86);
+  --color-ink-strong: #f2f9ff;
+  --color-ink: #d6e8f7;
+  --color-ink-muted: #9db8cf;
+  --color-ink-faint: #6f8aa3;
+  --color-hover: rgb(160 210 255 / 0.07);
+  --color-selected: rgb(58 159 224 / 0.18);
+  --color-line: rgb(160 210 255 / 0.08);
+  --color-edge: rgb(160 210 255 / 0.18);
+  --example-glass: rgb(11 26 42 / 0.62);
+  --example-glow: rgb(58 159 224 / 0.45);
+}
+
+:root[data-theme='light'] {
+  --tint-servers: #1a7fc4;
+  --tint-direct: #138a96;
+  --tint-call: #1f8f52;
+  --color-canvas: #dcebf7;
+  --color-panel: #e6f2fb;
+  --color-surface: #f3f9fe;
+  --color-surface-raised: #ffffff;
+  --color-card: #f7fbff;
+  --color-field: #e9f3fb;
+  --color-menu: rgb(255 255 255 / 0.82);
+  --color-ink-strong: #0b1a2a;
+  --color-ink: #1d3449;
+  --color-ink-muted: #4a6580;
+  --color-ink-faint: #7590aa;
+  --color-hover: rgb(20 70 120 / 0.06);
+  --color-selected: rgb(26 127 196 / 0.14);
+  --color-line: rgb(20 70 120 / 0.1);
+  --color-edge: rgb(20 70 120 / 0.2);
+  --example-glass: rgb(255 255 255 / 0.66);
+  --example-glow: rgb(26 127 196 / 0.35);
+}
+
+/* 2. Parts. Only data-part selectors are stable across app updates. */
+:root[data-theme] [data-part='window-header'],
+:root[data-theme] [data-part='menu'],
+:root[data-theme] [data-part='dialog'] {
+  background-color: var(--example-glass);
+  backdrop-filter: blur(18px) saturate(160%);
+}
+
+/* 3. Files from the package. url() resolves next to theme.css. */
+:root[data-theme] [data-part='navigation'] {
+  background-image: url('./frost.svg');
+  background-size: 240px 240px;
+}
+
+:root[data-theme] [data-part='composer']:focus-within {
+  box-shadow:
+    0 0 0 1px var(--color-edge),
+    0 0 18px -6px var(--example-glow);
+}
+
+:root[data-theme] [data-part='mention'] {
+  box-shadow: inset 2px 0 0 var(--tint-servers);
+}
+
+:root[data-theme] [data-part='avatar'] {
+  box-shadow: 0 0 0 1px var(--color-edge);
+}
+
+/* 4. Motion. A gentle shine that stops for reduced motion and the performance mode. */
+@keyframes example-shine {
+  from {
+    background-position: -120% 0;
+  }
+  to {
+    background-position: 220% 0;
+  }
+}
+
+:root[data-theme] [data-part='button-primary']:hover {
+  background-image: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgb(255 255 255 / 0.22) 50%,
+    transparent 70%
+  );
+  background-size: 60% 100%;
+  background-repeat: no-repeat;
+  animation: example-shine 900ms ease-out;
+}
+
+:root[data-motion='reduced'] [data-part='button-primary']:hover,
+:root[data-performance='on'] [data-part='button-primary']:hover {
+  animation: none;
+}
+
+:root[data-performance='on'] [data-part='window-header'],
+:root[data-performance='on'] [data-part='menu'],
+:root[data-performance='on'] [data-part='dialog'] {
+  backdrop-filter: none;
+}
