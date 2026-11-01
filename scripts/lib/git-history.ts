@@ -22,6 +22,16 @@ export class GitHistory {
     );
   }
 
+  changedFiles(base: string): string[] {
+    return this.#git(['diff', '--name-only', `${base}...HEAD`])
+      .split('\n')
+      .filter(Boolean);
+  }
+
+  trackedFiles(): string[] {
+    return this.#git(['ls-files']).split('\n').filter(Boolean);
+  }
+
   versionAt(ref: string, id: string): string | null {
     try {
       const manifest: unknown = JSON.parse(

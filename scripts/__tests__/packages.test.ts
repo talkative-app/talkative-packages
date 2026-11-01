@@ -10,6 +10,9 @@ import { CatalogBuilder } from '../lib/catalog-builder.ts';
 import { GitHistory } from '../lib/git-history.ts';
 import { PackageChecker } from '../lib/package-checker.ts';
 import { PackageRules } from '../lib/package-rules.ts';
+import { pullRequestScope } from '../lib/pull-request-scope.ts';
+import { pullRequestTitle } from '../lib/pull-request-title.ts';
+import { repositoryLayout } from '../lib/repository-layout.ts';
 import { versionBump } from '../lib/version-bump.ts';
 
 const example = path.resolve(import.meta.dirname, '../../packages/example');
@@ -201,5 +204,62 @@ describe('history', () => {
     assert.equal(versionBump.problem('doe', '1.9.0', '1.10.0'), null);
     assert.match(versionBump.problem('doe', '1.2.0', '1.2.0') ?? '', /above 1\.2\.0/);
     assert.match(versionBump.problem('doe', '2.0.0', '1.9.9') ?? '', /above 2\.0\.0/);
+  });
+});
+
+describe('pull requests', () => {
+  it('Package files outside packages/<id>/ are refused', () => {
+    const problems = repositoryLayout.problems([
+      'README.md',
+      'manifest.json',
+      'packages/theme.css',
+      'packages/doe/manifest.json',
+      'schema/rules.json',
+    ]);
+    assert.equal(problems.length, 2);
+    assert.match(problems.join('\n'), /^manifest\.json sits outside a package folder/);
+    assert.match(problems.join('\n'), /packages\/theme\.css sits outside a package folder/);
+  });
+
+  it('A package pull request changes one package and nothing else', () => {
+    assert.deepEqual(pullRequestScope.problems(['packages/doe/manifest.json']), []);
+    assert.deepEqual(
+      pullRequestScope.problems(['scripts/check.ts', 'packages/example/cover.png']),
+      [],
+    );
+    assert.equal(pullRequestScope.packageOf(['scripts/check.ts', 'packages/doe/cover.png']), null);
+    assert.match(
+      pullRequestScope.problems(['packages/doe/manifest.json', 'packages/jane/manifest.json'])[0] ??
+        '',
+      /changes doe, jane/,
+    );
+    assert.match(
+      pullRequestScope.problems(['packages/doe/manifest.json', 'theme.css'])[0] ?? '',
+      /theme\.css is outside packages\/doe\//,
+    );
+  });
+
+  it('A package pull request is titled with its type, id and version', () => {
+    const fresh = { id: 'doe', before: null, after: '1.0.0' };
+    assert.equal(pullRequestTitle.problem('feat: doe 1.0.0', fresh), null);
+    assert.match(
+      pullRequestTitle.problem('package: doe 1.0.0', fresh) ?? '',
+      /"feat: doe 1\.0\.0"/,
+    );
+    assert.equal(
+      pullRequestTitle.problem('fix: doe 1.0.1', { id: 'doe', before: '1.0.0', after: '1.0.1' }),
+      null,
+    );
+    assert.equal(
+      pullRequestTitle.problem('feat: doe 1.1.0', { id: 'doe', before: '1.0.0', after: '1.1.0' }),
+      null,
+    );
+    assert.match(
+      pullRequestTitle.problem('feat: doe 1.0.1', { id: 'doe', before: '1.0.0', after: '1.0.1' }) ??
+        '',
+      /"fix: doe 1\.0\.1"/,
+    );
+    assert.equal(pullRequestTitle.problem('ci: name actions', null), null);
+    assert.match(pullRequestTitle.problem('Update stuff', null) ?? '', /needs a type/);
   });
 });
