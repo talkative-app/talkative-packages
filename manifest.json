@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schema/manifest.schema.json",
+  "id": "frutiger-aero",
+  "name": "Frutiger Aero",
+  "version": "1.0.0",
+  "author": "broski",
+  "licence": "CC-BY-NC-4.0",
+  "description": "Powrót do Visty i Siódemki: szklane panele z poświatą, bańki płynące po niebie, błyszczące przyciski, okna w stylu Windows 7 i szklane ludziki zamiast kropek statusu. Dzień i noc z zorzą. W zestawie szklane, dzwonkowe dźwięki do wszystkich zdarzeń.",
+  "talkative": ">=0.7",
+  "contents": {
+    "themes": {
+      "frutiger-aero": {
+        "name": "Frutiger Aero",
+        "modes": [
+          "light",
+          "dark"
+        ],
+        "colors": [
+          "#3fb4ee",
+          "#8de04f",
+          "#ffffff",
+          "#0f2343"
+        ]
+      }
+    },
+    "sounds": {
+      "aero": {
+        "name": "Frutiger Aero",
+        "sounds": {
+          "app-start": "app-start.ogg",
+          "message": "message.ogg",
+          "direct-message": "direct-message.ogg",
+          "mention": "mention.ogg",
+          "message-sent": "message-sent.ogg",
+          "mute": "mute.ogg",
+          "unmute": "unmute.ogg",
+          "deafen": "deafen.ogg",
+          "undeafen": "undeafen.ogg",
+          "camera-on": "camera-on.ogg",
+          "camera-off": "camera-off.ogg",
+          "channel-join": "channel-join.ogg",
+          "channel-leave": "channel-leave.ogg",
+          "self-join": "self-join.ogg",
+          "self-leave": "self-leave.ogg",
+          "stream-start": "stream-start.ogg",
+          "stream-end": "stream-end.ogg",
+          "stream-watch": "stream-watch.ogg",
+          "stream-viewer-join": "stream-viewer-join.ogg",
+          "stream-viewer-leave": "stream-viewer-leave.ogg",
+          "ring-in": "ring-in.ogg",
+          "ring-out": "ring-out.ogg",
+          "call-end": "call-end.ogg",
+          "call-declined": "call-declined.ogg",
+          "connection-lost": "connection-lost.ogg",
+          "connection-back": "connection-back.ogg",
+          "welcome": "welcome.ogg"
+        }
+      }
+    }
+  },
+  "previews": []
+}

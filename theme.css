@@ -1,0 +1,1137 @@
+/* Frutiger Aero dla talkative
+   Szkło, bańki, okna w stylu Windows 7, ludziki zamiast kropek statusu.
+   Selektory: data-part z przewodnika talkative + atrybuty ARIA. */
+/* =====================================================================
+   FRUTIGER AERO — skin dla "talkative"
+   Dzień = jasny motyw apki, noc = ciemny motyw (przełącznik słońce/księżyc).
+   Kolory i efekty siedzą w zmiennych poniżej. Tapeta (base64) jest
+   na samym końcu pliku, żeby nie przeszkadzała w edycji.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   DZIEŃ
+   --------------------------------------------------------------------- */
+html:root[data-theme] {
+  color-scheme: light;
+
+  --aero-aqua: #1a9de0;
+  --aero-aqua-deep: #0f6fb0;
+  --aero-green: #34b36a;
+
+  /* tapeta */
+  --aero-wall-filter: blur(7px) saturate(125%) brightness(1.04);
+  --aero-veil:
+    radial-gradient(circle at 92% 12%, rgba(255,255,255,.9) 0, rgba(255,255,235,.5) 4%, transparent 18%),
+    radial-gradient(circle 60px at 80% 26%, rgba(255,220,140,.18), transparent),
+    radial-gradient(circle 26px at 72% 36%, rgba(140,220,255,.25), transparent),
+    radial-gradient(circle 90px at 58% 54%, rgba(190,255,190,.12), transparent),
+    linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.18));
+  --aero-rays: repeating-conic-gradient(from 0deg at 71% 31%,
+      rgba(255,255,240,.22) 0deg 3deg, transparent 3deg 11deg);
+  --aero-rays-mask: radial-gradient(circle at 71% 31%, #000 0, rgba(0,0,0,.6) 12%, transparent 34%);
+  --aero-rays-blur: blur(1px);
+
+  /* bańki */
+  --b-in: rgba(255,255,255,0);
+  --b-mid: rgba(170,230,255,.3);
+  --b-iri: rgba(255,190,250,.42);
+  --b-rim: rgba(255,255,255,.97);
+  --b-hl: rgba(255,255,255,.95);
+
+  /* szkło */
+  --aero-glass: linear-gradient(180deg,
+      rgba(255,255,255,.80) 0%, rgba(255,255,255,.56) 46%,
+      rgba(255,255,255,.38) 54%, rgba(255,255,255,.52) 100%);
+  --aero-glass-soft: linear-gradient(180deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.44) 100%);
+  --aero-sheen: linear-gradient(115deg, rgba(255,255,255,.42) 0%, rgba(255,255,255,.08) 22%, transparent 34%);
+  --aero-blur: blur(16px) saturate(170%);
+  --aero-rim: rgba(255,255,255,.85);
+  --aero-shadow: 0 10px 30px -12px rgba(0,70,140,.45), inset 0 1px 0 rgba(255,255,255,.95);
+  --aero-header: linear-gradient(180deg, rgba(255,255,255,.7) 0%, rgba(255,255,255,.35) 50%, rgba(255,255,255,.12) 51%, rgba(255,255,255,.25) 100%);
+  --aero-hover: rgba(255,255,255,.55);
+  --aero-pill: linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(215,240,255,.85) 50%, rgba(185,225,250,.8) 51%, rgba(225,245,255,.9) 100%);
+  --aero-pill-border: rgba(60,150,220,.55);
+  --aero-glow: rgba(80,190,255,.45);
+  --aero-field: linear-gradient(180deg, rgba(255,255,255,.95), rgba(240,250,255,.85));
+  --aero-field-border: rgba(70,130,190,.45);
+  --aero-text-glow: 0 1px 0 rgba(255,255,255,.9);
+  --aero-mention: linear-gradient(90deg, rgba(255,230,140,.55), rgba(255,245,200,.25));
+
+  /* przyciski */
+  --aero-btn: linear-gradient(180deg, #a9e6ff 0%, #5cc4f5 48%, #1f97de 52%, #45b8f0 100%);
+  --aero-btn-hover: linear-gradient(180deg, #c8f0ff 0%, #78d2fa 48%, #2fa6ea 52%, #64c8f6 100%);
+  --aero-btn-border: #0f6fb0;
+  --aero-green-btn: linear-gradient(180deg, #c9f5b0 0%, #7ad85a 48%, #3cae2e 52%, #6fd04f 100%);
+  --aero-win: linear-gradient(180deg, rgba(255,255,255,.85) 0%, rgba(220,240,255,.55) 50%, rgba(190,225,250,.45) 51%, rgba(230,245,255,.7) 100%);
+  --aero-win-border: rgba(40,90,140,.45);
+  --aero-win-ink: #1c4570;
+
+  /* zmienne samej apki */
+  --tint-servers: var(--aero-aqua);
+  --tint-direct: var(--aero-green);
+  --tint-call: var(--aero-green);
+  --color-canvas: rgba(255,255,255,.55);
+  --color-panel: transparent;
+  --color-surface: rgba(255,255,255,.7);
+  --color-surface-raised: #ffffff;
+  --color-card: rgba(255,255,255,.62);
+  --color-field: rgba(255,255,255,.78);
+  --color-menu: rgba(255,255,255,.94);
+  --color-line: rgba(10,80,150,.16);
+  --color-edge: rgba(255,255,255,.9);
+  --color-ink-strong: #062a4d;
+  --color-ink: #163d63;
+  --color-ink-muted: #36597d;
+  --color-ink-faint: #567896;
+  --color-channel: #1f4770;
+  --color-hover: rgba(255,255,255,.45);
+  --color-selected: rgba(255,255,255,.7);
+  --color-link: #0b66b8;
+  --color-online: #2fb52f;
+  --color-voice: #23a35a;
+  --color-voice-ink: #127a40;
+  --color-warning: #a96d00;
+  --color-scrim: rgba(10,60,110,.28);
+  --color-on-accent: #ffffff;
+  --person-base: #062a4d;
+  --person-mix: 56%;
+  --avatar-mix: 60%;
+  --elevation-sm: 0 6px 18px -10px rgba(0,70,140,.4), inset 0 1px 0 rgba(255,255,255,.9);
+  --elevation-md: 0 12px 28px -12px rgba(0,70,140,.45);
+  --elevation-field: inset 0 1px 3px rgba(0,60,120,.18), 0 1px 0 rgba(255,255,255,.9);
+  --elevation-lg: 0 24px 60px -16px rgba(0,60,120,.5);
+  --blur-glass: 16px;
+  --font-sans: "Segoe UI", "Frutiger", "Myriad Pro", "Nunito Variable", system-ui, sans-serif;
+  --wall: transparent;
+}
+
+/* ---------------------------------------------------------------------
+   NOC
+   --------------------------------------------------------------------- */
+html:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --aero-aqua: #2ec4ff;
+  --aero-aqua-deep: #0a5d96;
+  --aero-green: #3fd88a;
+
+  --aero-wall-filter: blur(8px) brightness(.36) saturate(140%) contrast(1.15) hue-rotate(-8deg);
+  --aero-veil:
+    radial-gradient(circle at 92% 12%, rgba(235,245,255,.95) 0 1.2%, rgba(170,210,255,.35) 2.6%, transparent 13%),
+    radial-gradient(1.2px 1.2px at 12% 8%, #fff, transparent),
+    radial-gradient(1px 1px at 22% 18%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 31% 6%, #dff, transparent),
+    radial-gradient(1px 1px at 44% 14%, #fff, transparent),
+    radial-gradient(1.3px 1.3px at 52% 24%, #fff, transparent),
+    radial-gradient(1px 1px at 63% 9%, #cef, transparent),
+    radial-gradient(1.6px 1.6px at 70% 20%, #fff, transparent),
+    radial-gradient(1px 1px at 79% 4%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 6% 28%, #fff, transparent),
+    radial-gradient(1px 1px at 38% 30%, #dff, transparent),
+    radial-gradient(1.4px 1.4px at 85% 32%, #fff, transparent),
+    radial-gradient(1px 1px at 97% 22%, #fff, transparent),
+    radial-gradient(1px 1px at 17% 36%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 58% 3%, #fff, transparent),
+    radial-gradient(ellipse 60% 25% at 75% 62%, rgba(255,190,90,.14), transparent 70%),
+    linear-gradient(180deg, rgba(4,8,35,.55) 0%, rgba(8,24,70,.25) 55%, rgba(0,20,25,.45) 100%);
+  /* zorza zamiast promieni słońca */
+  --aero-rays:
+    radial-gradient(ellipse 30% 12% at 30% 22%, rgba(60,255,170,.35), transparent 70%),
+    radial-gradient(ellipse 26% 10% at 52% 18%, rgba(60,220,255,.32), transparent 70%),
+    radial-gradient(ellipse 22% 9% at 70% 26%, rgba(170,110,255,.28), transparent 70%);
+  --aero-rays-mask: linear-gradient(#000, #000);
+  --aero-rays-blur: blur(30px);
+
+  --b-in: rgba(60,180,255,.05);
+  --b-mid: rgba(60,190,255,.12);
+  --b-iri: rgba(120,230,255,.28);
+  --b-rim: rgba(150,235,255,.75);
+  --b-hl: rgba(220,250,255,.85);
+
+  --aero-glass: linear-gradient(180deg,
+      rgba(70,130,200,.42) 0%, rgba(22,52,98,.58) 46%,
+      rgba(8,26,58,.66) 54%, rgba(14,38,78,.62) 100%);
+  --aero-glass-soft: linear-gradient(180deg, rgba(20,48,92,.55) 0%, rgba(6,22,50,.62) 100%);
+  --aero-sheen: linear-gradient(115deg, rgba(160,220,255,.16) 0%, rgba(160,220,255,.03) 22%, transparent 34%);
+  --aero-rim: rgba(130,200,255,.32);
+  --aero-shadow: 0 10px 34px -10px rgba(0,0,0,.7), 0 0 22px -8px rgba(46,196,255,.35), inset 0 1px 0 rgba(170,225,255,.35);
+  --aero-header: linear-gradient(180deg, rgba(90,150,215,.32) 0%, rgba(30,70,120,.25) 50%, rgba(5,20,45,.3) 51%, rgba(15,40,75,.35) 100%);
+  --aero-hover: rgba(110,190,255,.14);
+  --aero-pill: linear-gradient(180deg, rgba(90,170,240,.55) 0%, rgba(30,100,180,.5) 50%, rgba(10,60,130,.55) 51%, rgba(40,120,200,.55) 100%);
+  --aero-pill-border: rgba(90,200,255,.65);
+  --aero-glow: rgba(46,196,255,.55);
+  --aero-field: linear-gradient(180deg, rgba(4,16,38,.82), rgba(10,30,62,.75));
+  --aero-field-border: rgba(90,170,240,.4);
+  --aero-text-glow: 0 0 10px rgba(46,196,255,.45);
+  --aero-mention: linear-gradient(90deg, rgba(255,190,60,.22), rgba(255,190,60,.05));
+
+  --aero-btn: linear-gradient(180deg, #7fdcff 0%, #2aa8ea 48%, #0b6fb8 52%, #2a9ee0 100%);
+  --aero-btn-hover: linear-gradient(180deg, #a6e8ff 0%, #45bcf5 48%, #1484d0 52%, #42b4ef 100%);
+  --aero-btn-border: #0a4f80;
+  --aero-green-btn: linear-gradient(180deg, #a5f3c8 0%, #45d58a 48%, #169a58 52%, #3cc47e 100%);
+  --aero-win: linear-gradient(180deg, rgba(120,170,220,.45) 0%, rgba(50,90,140,.4) 50%, rgba(20,45,85,.5) 51%, rgba(50,90,140,.45) 100%);
+  --aero-win-border: rgba(130,190,250,.4);
+  --aero-win-ink: #dff2ff;
+
+  --color-canvas: rgba(4,14,34,.6);
+  --color-surface: rgba(10,26,52,.72);
+  --color-surface-raised: #13294d;
+  --color-card: rgba(14,34,68,.62);
+  --color-field: rgba(5,20,45,.72);
+  --color-menu: rgba(12,30,62,.95);
+  --color-line: rgba(140,200,255,.16);
+  --color-edge: rgba(140,200,255,.3);
+  --color-ink-strong: #eef8ff;
+  --color-ink: #cbe4f8;
+  --color-ink-muted: #a3c3df;
+  --color-ink-faint: #7f9fbe;
+  --color-channel: #b8d5ef;
+  --color-hover: rgba(110,190,255,.12);
+  --color-selected: rgba(110,190,255,.2);
+  --color-link: #7fd3ff;
+  --color-online: #43e08a;
+  --color-voice: #43d68a;
+  --color-voice-ink: #43d68a;
+  --color-warning: #f0c24a;
+  --color-scrim: rgba(0,6,20,.55);
+  --person-base: #ffffff;
+  --person-mix: 62%;
+  --avatar-mix: 100%;
+  --elevation-sm: 0 8px 20px -10px rgba(0,0,0,.6), inset 0 1px 0 rgba(170,225,255,.2);
+  --elevation-md: 0 12px 30px -12px rgba(0,0,0,.65);
+  --elevation-field: inset 0 1px 4px rgba(0,0,0,.45), 0 1px 0 rgba(140,200,255,.12);
+  --elevation-lg: 0 24px 60px -16px rgba(0,0,0,.7);
+}
+
+/* ---------------------------------------------------------------------
+   WARSTWY TŁA
+   html::before  zdjęcie (rozmyte)
+   body::before  słońce/księżyc, gwiazdy, przyciemnienie
+   #root::before promienie słońca / zorza (powoli się ruszają)
+   body::after   małe bańki   } płyną w górę z różną prędkością
+   html::after   duże bańki   }
+   --------------------------------------------------------------------- */
+html:root { background: #3a9fe0 !important; }
+html:root[data-theme="dark"] { background: #050d22 !important; }
+body { background: transparent !important; }
+
+html::before,
+body::before,
+body::after,
+html::after,
+#root::before {
+  content: "";
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+}
+
+html::before {
+  inset: -40px;
+  background: var(--aero-wallpaper) center 62% / cover no-repeat;
+  filter: var(--aero-wall-filter);
+  transition: filter .6s;
+}
+
+body::before {
+  inset: 0;
+  background: var(--aero-veil);
+  animation: aero-breathe 7s ease-in-out infinite;
+}
+
+#root::before {
+  inset: -50%;
+  background: var(--aero-rays);
+  -webkit-mask-image: var(--aero-rays-mask);
+          mask-image: var(--aero-rays-mask);
+  filter: var(--aero-rays-blur);
+  transform-origin: 71% 31%;
+  animation: aero-spin 140s linear infinite;
+}
+html:root[data-theme="dark"] #root::before {
+  inset: 0;
+  transform-origin: 50% 20%;
+  animation: aero-aurora 18s ease-in-out infinite alternate;
+}
+
+body::after {
+  left: 0; right: 0; top: 0;
+  height: calc(100% + 760px);
+  background:
+    radial-gradient(circle 6px at 166px 416px, var(--b-hl), transparent),
+    radial-gradient(circle 19px at 173px 423px, var(--b-in) 0 58%, var(--b-mid) 74%, var(--b-iri) 87%, var(--b-rim) 95%, transparent 100%),
+    radial-gradient(circle 3px at 80px 554px, var(--b-hl), transparent),
+    radial-gradient(circle 10px at 84px 558px, var(--b-in) 0 58%, var(--b-mid) 74%, var(--b-iri) 87%, var(--b-rim) 95%, transparent 100%),
+    radial-gradient(circle 4px at 381px 603px, var(--b-hl), transparent),
+    radial-gradient(circle 12px at 386px 608px, var(--b-in) 0 58%, var(--b-mid) 74%, var(--b-iri) 87%, var(--b-rim) 95%, transparent 100%),
+    radial-gradient(circle 3px at 525px 225px, var(--b-hl), transparent),
+    radial-gradient(circle 10px at 529px 229px, var(--b-in) 0 58%, var(--b-mid) 74%, var(--b-iri) 87%, var(--b-rim) 95%, transparent 100%),
+    radial-gradient(circle 3px at 94px 450px, var(--b-hl), transparent),
+    radial-gradient(circle 10px at 98px 454px, var(--b-in) 0 58%, var(--b-mid) 74%, var(--b-iri) 87%, var(--b-rim) 95%, transparent 100%),
+    radial-gradient(circle 7px at 85px 260px, var(--b-hl), transparent),
+    radial-gradient(circle 22px at 93px 268px, var(--b-in) 0 58%, var(--b-mid) 74%, var(--b-iri) 87%, var(--b-rim) 95%, transparent 100%),
+    radial-gradient(circle 3px at 571px 441px, var(--b-hl), transparent),
+    radial-gradient(circle 11px at 575px 445px, var(--b-in) 0 58%, var(--b-mid) 74%, var(--b-iri) 87%, var(--b-rim) 95%, transparent 100%);
+  background-size: 640px 760px;
+  animation: aero-rise-small 55s linear infinite;
+}
+
+html::after {
+  left: 0; right: 0; top: 0;
+  height: calc(100% + 1300px);
+  background:
+    radial-gradient(circle 11px at 276px 480px, var(--b-hl), transparent),
+    radial-gradient(circle 37px at 290px 494px, var(--b-in) 0 58%, var(--b-mid) 74%, var(--b-iri) 87%, var(--b-rim) 95%, transparent 100%),
+    radial-gradient(circle 11px at 835px 124px, var(--b-hl), transparent),
+    radial-gradient(circle 37px at 849px 138px, var(--b-in) 0 58%, var(--b-mid) 74%, var(--b-iri) 87%, var(--b-rim) 95%, transparent 100%),
+    radial-gradient(circle 14px at 77px 1170px, var(--b-hl), transparent),
+    radial-gradient(circle 48px at 95px 1188px, var(--b-in) 0 58%, var(--b-mid) 74%, var(--b-iri) 87%, var(--b-rim) 95%, transparent 100%),
+    radial-gradient(circle 13px at 322px 884px, var(--b-hl), transparent),
+    radial-gradient(circle 42px at 338px 900px, var(--b-in) 0 58%, var(--b-mid) 74%, var(--b-iri) 87%, var(--b-rim) 95%, transparent 100%);
+  background-size: 1100px 1300px;
+  animation: aero-rise-big 120s linear infinite;
+  opacity: .9;
+}
+
+@keyframes aero-rise-small { to { transform: translate3d(-40px, -760px, 0); } }
+@keyframes aero-rise-big   { to { transform: translate3d(60px, -1300px, 0); } }
+@keyframes aero-spin       { to { transform: rotate(360deg); } }
+@keyframes aero-breathe    { 50% { opacity: .82; } }
+@keyframes aero-aurora {
+  0%   { transform: translateX(-4%) skewX(-6deg) scaleY(1); opacity: .75; }
+  50%  { transform: translateX(3%)  skewX(5deg)  scaleY(1.25); opacity: 1; }
+  100% { transform: translateX(6%)  skewX(-3deg) scaleY(.9); opacity: .8; }
+}
+
+/* ustawienia apki "ogranicz animacje" i "tryb wydajności" zatrzymują ruch */
+html:root[data-motion="reduced"] *::before,
+html:root[data-motion="reduced"] *::after,
+html:root[data-motion="reduced"]::before,
+html:root[data-motion="reduced"]::after,
+html:root[data-performance="on"] *::before,
+html:root[data-performance="on"] *::after,
+html:root[data-performance="on"]::after {
+  animation: none !important;
+}
+html:root[data-performance="on"]::before { filter: none; }
+
+/* ---------------------------------------------------------------------
+   SZKLANE PANELE
+   --------------------------------------------------------------------- */
+[data-part='navigation'] {
+  background: var(--aero-glass) !important;
+  backdrop-filter: var(--aero-blur);
+  border-right: 1px solid var(--aero-rim) !important;
+  box-shadow: 4px 0 24px -12px rgba(0,40,100,.5), inset -1px 0 0 var(--aero-rim);
+}
+
+.glass,
+.card {
+  background: var(--aero-glass) !important;
+  backdrop-filter: var(--aero-blur) !important;
+  border: 1px solid var(--aero-rim) !important;
+  box-shadow: var(--aero-shadow) !important;
+}
+
+main {
+  position: relative;
+  margin: var(--spacing-m);
+  border-radius: var(--radius-2xl);
+  background: var(--aero-glass-soft);
+  backdrop-filter: var(--aero-blur);
+  border: 1px solid var(--aero-rim);
+  box-shadow: var(--aero-shadow);
+  overflow: hidden;
+}
+[data-part='member-list'] { margin-left: 0; position: relative; }
+
+/* ukośny odblask szyby */
+[data-part='navigation']::after,
+main::after,
+[data-part='member-list']::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--aero-sheen);
+  pointer-events: none;
+}
+
+[data-part='window-header'] {
+  background: var(--aero-header);
+  border-bottom: 1px solid var(--aero-rim);
+  box-shadow: 0 1px 0 rgba(0,90,160,.12);
+}
+/* tytuł okna i nagłówek: poświata jak napisy na pasku tytułu w Win7 */
+[data-part='window-header'],
+[data-part='navigation'] .drag-region .text-heading {
+  color: var(--color-ink-strong);
+  text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 12px rgba(255,255,255,.95), 0 0 20px rgba(255,255,255,.75);
+}
+html:root[data-theme="dark"] [data-part='window-header'],
+html:root[data-theme="dark"] [data-part='navigation'] .drag-region .text-heading {
+  text-shadow: 0 1px 2px rgba(0,10,30,.8), 0 0 8px rgba(46,196,255,.45);
+}
+
+.bg-menu,
+[data-part='menu'],
+[role="listbox"],
+[data-radix-popper-content-wrapper] > * {
+  background-color: var(--color-menu);
+  backdrop-filter: var(--aero-blur);
+}
+
+/* ---------------------------------------------------------------------
+   PRZYCISKI
+   --------------------------------------------------------------------- */
+[data-part='button-primary'] {
+  position: relative;
+  overflow: hidden;
+  background: var(--aero-btn) !important;
+  border: 1px solid var(--aero-btn-border);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8), 0 2px 8px -1px var(--aero-glow);
+  color: #fff !important;
+  text-shadow: 0 1px 1px rgba(0,50,100,.55);
+}
+[data-part='button-primary']:hover:not(:disabled) { background: var(--aero-btn-hover) !important; filter: none; }
+[data-part='button-primary']:disabled { filter: grayscale(.6) opacity(.75); }
+
+/* błysk przelatujący po przycisku przy najechaniu */
+[data-part='button-primary']::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: -60%;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.75), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+[data-part='button-primary']:hover:not(:disabled)::after { animation: aero-shine .7s ease-out; }
+@keyframes aero-shine { to { left: 130%; } }
+
+/* niebieski znacznik aktywnego kanału świeci */
+span.bg-accent {
+  background: var(--aero-btn) !important;
+  box-shadow: 0 0 8px var(--aero-glow);
+}
+
+.bg-voice,
+.bg-online { background-image: var(--aero-green-btn); }
+
+/* przełącznik Servers / Direct */
+[data-part='place-switch'] {
+  background: var(--aero-hover);
+  border: 1px solid var(--aero-rim);
+  box-shadow: inset 0 1px 3px rgba(0,40,100,.2);
+}
+[data-part='place-switch'] [aria-pressed='true'] > span[aria-hidden='true'] {
+  background: var(--aero-pill) !important;
+  border: 1px solid var(--aero-pill-border);
+  box-shadow: 0 0 10px var(--aero-glow), inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+/* przyciski okna, styl Windows 7 */
+[data-part='window-control'][aria-label='Minimize'],
+[data-part='window-control'][aria-label='Maximize'],
+[data-part='window-control'][aria-label='Close'] {
+  margin: 6px 0 auto;
+  height: 22px;
+  width: 38px;
+  color: var(--aero-win-ink);
+  background: var(--aero-win);
+  border: 1px solid var(--aero-win-border);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+}
+[data-part='window-control'][aria-label='Minimize'] { border-radius: 0 0 0 5px; border-right: 0; }
+[data-part='window-control'][aria-label='Maximize'] { border-radius: 0; }
+[data-part='window-control'][aria-label='Close'] {
+  margin-right: 8px;
+  width: 46px;
+  border-radius: 0 0 5px 0;
+  color: #fff;
+  background: linear-gradient(180deg, #f3b2a6 0%, #e37762 48%, #c83a1f 52%, #e0745a 100%);
+  border-color: #8f2a14;
+}
+[data-part='window-control'][aria-label='Minimize']:hover,
+[data-part='window-control'][aria-label='Maximize']:hover { background: var(--aero-btn-hover); color: #fff; }
+[data-part='window-control'][aria-label='Close']:hover {
+  background: linear-gradient(180deg, #ffc9bd 0%, #f5866d 48%, #e0401f 52%, #f78e6f 100%);
+  box-shadow: 0 0 12px rgba(255,90,50,.7), inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+/* ---------------------------------------------------------------------
+   LISTY
+   --------------------------------------------------------------------- */
+[data-part='channel-list'] [aria-current='page'] {
+  background: var(--aero-pill) !important;
+  border: 1px solid var(--aero-pill-border);
+  box-shadow: 0 0 12px var(--aero-glow), inset 0 1px 0 rgba(255,255,255,.7);
+}
+
+.hover\:bg-hover:hover {
+  background-color: var(--aero-hover) !important;
+  box-shadow: inset 0 0 0 1px var(--aero-rim);
+}
+
+[data-part='channel-list'] section > div button span.truncate,
+[data-part='member-list'] h3 {
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+[data-mentioned="true"] {
+  background: var(--aero-mention) !important;
+  border-left-color: #e3a51a !important;
+}
+
+[role="separator"][aria-label] > span.rounded-full {
+  background: var(--aero-glass);
+  border: 1px solid var(--aero-rim);
+  box-shadow: var(--elevation-sm);
+  color: var(--color-ink-muted);
+}
+[data-day-line] { background: linear-gradient(90deg, transparent, var(--aero-rim), transparent) !important; }
+
+article.bg-surface {
+  background: var(--aero-glass) !important;
+  border-left-color: var(--aero-aqua) !important;
+  box-shadow: var(--elevation-sm);
+}
+
+div.border-canvas.bg-surface {
+  background: var(--aero-glass) !important;
+  backdrop-filter: var(--aero-blur);
+  border-color: var(--aero-rim) !important;
+  box-shadow: var(--elevation-md);
+}
+
+[data-part='avatar'] {
+  box-shadow: 0 0 0 2px var(--aero-rim), 0 2px 6px rgba(0,50,110,.35);
+}
+[data-part='presence-dot'] { border-color: var(--aero-rim) !important; }
+/* ktoś mówi na voice — pulsująca poświata */
+/* pierścień "mówi": span dopasowany do kółka awatara, żeby obwódka była na środku */
+/* tylko mały span wokół awatara (lista kanału głosowego), NIE kafelki w rozmowie */
+[data-part='voice-members'] span[data-speaking]:has(> [data-part='avatar']:only-child) {
+  display: inline-grid;
+  line-height: 0;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+[data-part='voice-members'] span[data-speaking="true"]:has(> [data-part='avatar']:only-child) {
+  box-shadow: 0 0 0 2px var(--color-voice), 0 0 10px 1px var(--color-voice) !important;
+}
+[data-part='voice-members'] span[data-speaking="true"] > [data-part='avatar']:only-child { box-shadow: none; }
+
+/* ---------------------------------------------------------------------
+   POLA
+   --------------------------------------------------------------------- */
+[data-part='field'],
+input[type="text"],
+input[type="search"],
+textarea {
+  background: var(--aero-field) !important;
+  border-color: var(--aero-field-border) !important;
+  box-shadow: var(--elevation-field);
+}
+[data-part='composer']:focus-within,
+[data-part='field']:focus-within,
+input:focus,
+textarea:focus {
+  border-color: var(--aero-aqua) !important;
+  box-shadow: 0 0 0 3px var(--aero-glow), var(--elevation-field) !important;
+}
+
+/* ---------------------------------------------------------------------
+   DROBIAZGI
+   --------------------------------------------------------------------- */
+[data-part='user-panel'] .from-surface {
+  --tw-gradient-from: var(--color-surface);
+  --tw-gradient-to: transparent;
+}
+::selection { background: var(--aero-glow); }
+:focus-visible { outline-color: var(--aero-aqua); }
+
+/* ---------------------------------------------------------------------
+   AWATARY POD SZKŁEM (zdjęcia i domyślne)
+   --------------------------------------------------------------------- */
+[data-part='avatar']::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 72% 46% at 50% 20%, rgba(255,255,255,.78) 0%, rgba(255,255,255,.28) 70%, rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 60% 30% at 50% 100%, rgba(255,255,255,.32), transparent 75%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), inset 0 -3px 6px rgba(0,30,70,.22);
+}
+
+/* awatar ze zdjęciem: tylko cienki połysk przy górnej krawędzi i obwódka.
+   Żeby całkiem go wyłączyć, ustaw "background: none;" poniżej. */
+[data-part='avatar']:has(> [data-reveal])::after {
+  background: radial-gradient(ellipse 62% 22% at 50% 9%, rgba(255,255,255,.38), rgba(255,255,255,0) 100%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.4);
+}
+
+/* domyślny awatar (inicjały) jako żelowa kula w kolorze osoby.
+   Żeby wrócić do płaskich inicjałów, usuń te dwie reguły. */
+[data-part='avatar'] > span.grid:first-child {
+  background-color: currentColor !important;
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 48%, rgba(0,20,60,.22) 100%),
+    radial-gradient(ellipse 80% 45% at 50% 105%, rgba(255,255,255,.6), transparent 70%);
+}
+[data-part='avatar'] > span.grid:first-child > .text-trim {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,25,60,.55);
+}
+
+/* ---------------------------------------------------------------------
+   SZKLANE KULKI STATUSU
+   --------------------------------------------------------------------- */
+[data-part='presence-dot'] {
+  border-width: 2px !important;
+  background-image:
+    radial-gradient(circle at 36% 28%, rgba(255,255,255,.95) 0 16%, rgba(255,255,255,.25) 34%, transparent 50%),
+    radial-gradient(circle at 50% 115%, rgba(255,255,255,.55), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(0,0,0,.18)) !important;
+  box-shadow: inset 0 -1px 2px rgba(0,0,0,.3);
+}
+[data-part='presence-dot']:is(.bg-online, [data-status='online'])  { box-shadow: 0 0 6px rgba(70,220,90,.9),  inset 0 -1px 2px rgba(0,0,0,.3); }
+[data-part='presence-dot']:is(.bg-idle, [data-status='idle'])    { box-shadow: 0 0 6px rgba(255,190,40,.9), inset 0 -1px 2px rgba(0,0,0,.3); }
+[data-part='presence-dot']:is(.bg-dnd, [data-status='dnd'])     { box-shadow: 0 0 6px rgba(255,60,60,.9),  inset 0 -1px 2px rgba(0,0,0,.3); }
+[data-part='presence-dot']:is(.bg-offline, [data-status='offline']) { box-shadow: inset 0 -1px 2px rgba(0,0,0,.3); }
+
+/* kształty statusów: zaraz wracam = półksiężyc, nie przeszkadzać = znak
+   zakazu, offline = pusty szklany pierścień, online = pełna kula */
+[data-part='presence-dot']:is(.bg-idle, [data-status='idle']) {
+  background-image:
+    radial-gradient(circle at 18% 20%, var(--aero-rim) 0 50%, transparent 53%),
+    radial-gradient(circle at 72% 74%, rgba(255,255,255,.8) 0 9%, transparent 24%),
+    linear-gradient(180deg, rgba(255,255,255,.35), rgba(0,0,0,.15)) !important;
+}
+[data-part='presence-dot']:is(.bg-dnd, [data-status='dnd']) {
+  background-image:
+    linear-gradient(#fff, #fff),
+    radial-gradient(circle at 36% 24%, rgba(255,255,255,.7) 0 14%, transparent 36%),
+    linear-gradient(180deg, rgba(255,255,255,.3), rgba(0,0,0,.2)) !important;
+  background-size: 56% 22%, 100% 100%, 100% 100% !important;
+  background-position: center, center, center !important;
+  background-repeat: no-repeat !important;
+}
+[data-part='presence-dot']:is(.bg-offline, [data-status='offline']) {
+  background-image:
+    radial-gradient(circle, var(--aero-rim) 0 30%, transparent 33%),
+    radial-gradient(circle at 36% 24%, rgba(255,255,255,.8) 0 14%, transparent 34%) !important;
+}
+
+/* ---------------------------------------------------------------------
+   IKONY KANAŁÓW W SZKLANYCH KAFELKACH
+   --------------------------------------------------------------------- */
+[data-part='channel-row'] svg:is(.tabler-icon-hash, .tabler-icon-volume) {
+  box-sizing: content-box;
+  width: 12px;
+  height: 12px;
+  padding: 4px;
+  border-radius: 6px;
+  color: #fff !important;
+  stroke-width: 2.6;
+  background: var(--aero-btn);
+  border: 1px solid var(--aero-btn-border);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.75), 0 1px 3px rgba(0,50,110,.35);
+  filter: drop-shadow(0 1px 0 rgba(0,50,100,.35));
+}
+[data-part='channel-row'] svg.tabler-icon-volume {
+  background: var(--aero-green-btn);
+  border-color: #1f7d2a;
+}
+[data-part='channel-row']:not([aria-current='page'], :has([aria-current='page'])) svg:is(.tabler-icon-hash, .tabler-icon-volume) {
+  opacity: .82;
+}
+[data-part='channel-row']:hover svg:is(.tabler-icon-hash, .tabler-icon-volume) {
+  opacity: 1;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.75), 0 0 8px var(--aero-glow);
+}
+
+/* ---------------------------------------------------------------------
+   3a. SCROLLBARY W STYLU VISTY
+   --------------------------------------------------------------------- */
+[data-radix-scroll-area-viewport] ~ [data-orientation="vertical"] {
+  width: 12px !important;
+  padding: 1px !important;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(255,255,255,.25), rgba(255,255,255,.5)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.5), inset 1px 0 2px rgba(0,40,90,.12);
+}
+[data-radix-scroll-area-viewport] ~ [data-orientation="vertical"] > div {
+  border-radius: 5px !important;
+  background:
+    repeating-linear-gradient(180deg, rgba(40,90,140,.45) 0 1px, rgba(255,255,255,.9) 1px 2px, transparent 2px 4px) center / 6px 10px no-repeat,
+    linear-gradient(90deg, #f6fbff 0%, #dcedf9 50%, #c3dff3 51%, #d7eaf7 100%) !important;
+  border: 1px solid rgba(60,110,160,.55);
+  box-shadow: inset 0 1px 0 #fff;
+}
+[data-radix-scroll-area-viewport] ~ [data-orientation="vertical"] > div:hover {
+  background:
+    repeating-linear-gradient(180deg, rgba(20,80,140,.55) 0 1px, rgba(255,255,255,.9) 1px 2px, transparent 2px 4px) center / 6px 10px no-repeat,
+    linear-gradient(90deg, #eaf7ff 0%, #bfe5fb 50%, #8fd0f6 51%, #b5e1f9 100%) !important;
+  border-color: rgba(30,110,180,.75);
+}
+html:root[data-theme="dark"] [data-radix-scroll-area-viewport] ~ [data-orientation="vertical"] {
+  background: linear-gradient(90deg, rgba(0,10,30,.35), rgba(40,80,130,.3)) !important;
+  box-shadow: inset 0 0 0 1px rgba(130,200,255,.2);
+}
+html:root[data-theme="dark"] [data-radix-scroll-area-viewport] ~ [data-orientation="vertical"] > div {
+  background:
+    repeating-linear-gradient(180deg, rgba(200,235,255,.6) 0 1px, rgba(0,20,50,.6) 1px 2px, transparent 2px 4px) center / 6px 10px no-repeat,
+    linear-gradient(90deg, #4f7fae 0%, #2e5e90 50%, #1c4675 51%, #2d5b8c 100%) !important;
+  border-color: rgba(130,200,255,.45);
+  box-shadow: inset 0 1px 0 rgba(200,235,255,.4);
+}
+
+/* zwykłe przewijane obszary (np. treść ustawień) */
+*::-webkit-scrollbar { width: 12px; height: 12px; }
+*::-webkit-scrollbar-track { background: linear-gradient(90deg, rgba(255,255,255,.2), rgba(255,255,255,.45)); border-radius: 6px; }
+*::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  border: 1px solid rgba(60,110,160,.55);
+  background:
+    repeating-linear-gradient(180deg, rgba(40,90,140,.45) 0 1px, rgba(255,255,255,.9) 1px 2px, transparent 2px 4px) center / 6px 10px no-repeat,
+    linear-gradient(90deg, #f6fbff 0%, #dcedf9 50%, #c3dff3 51%, #d7eaf7 100%);
+}
+html:root[data-theme="dark"] *::-webkit-scrollbar-track { background: rgba(0,15,40,.35); }
+html:root[data-theme="dark"] *::-webkit-scrollbar-thumb {
+  border-color: rgba(130,200,255,.45);
+  background:
+    repeating-linear-gradient(180deg, rgba(200,235,255,.6) 0 1px, rgba(0,20,50,.6) 1px 2px, transparent 2px 4px) center / 6px 10px no-repeat,
+    linear-gradient(90deg, #4f7fae 0%, #2e5e90 50%, #1c4675 51%, #2d5b8c 100%);
+}
+
+/* ---------------------------------------------------------------------
+   3b. TOOLTIPY I MENU KONTEKSTOWE (Vista/7)
+   --------------------------------------------------------------------- */
+[data-radix-popper-content-wrapper] > :has([role="tooltip"]) {
+  background: linear-gradient(180deg, #ffffff 0%, #e4e5f0 100%) !important;
+  color: #4c4c4c !important;
+  border: 1px solid #767676 !important;
+  border-radius: 3px !important;
+  box-shadow: 2px 2px 4px rgba(0,0,0,.25) !important;
+  backdrop-filter: none !important;
+  text-shadow: none !important;
+}
+[data-radix-popper-content-wrapper] > :has([role="tooltip"]) svg { color: #e4e5f0; fill: #e4e5f0; }
+html:root[data-theme="dark"] [data-radix-popper-content-wrapper] > :has([role="tooltip"]) {
+  background: linear-gradient(180deg, #2a4a72 0%, #142a4a 100%) !important;
+  color: #e6f3ff !important;
+  border-color: rgba(140,200,255,.55) !important;
+  box-shadow: 0 0 10px rgba(46,196,255,.3), 2px 2px 6px rgba(0,0,0,.5) !important;
+}
+html:root[data-theme="dark"] [data-radix-popper-content-wrapper] > :has([role="tooltip"]) svg { color: #142a4a; fill: #142a4a; }
+
+[data-part='menu'] {
+  border: 1px solid rgba(120,150,180,.6) !important;
+  box-shadow: 0 8px 24px -6px rgba(0,40,90,.4), inset 0 0 0 1px rgba(255,255,255,.7) !important;
+}
+[role="menuitem"][data-highlighted],
+[role="menuitemradio"][data-highlighted],
+[role="menuitemcheckbox"][data-highlighted],
+[role="option"][data-highlighted],
+[role="option"][aria-selected="true"] {
+  background: linear-gradient(180deg, rgba(230,245,255,.95) 0%, rgba(200,230,252,.95) 50%, rgba(180,220,250,.95) 51%, rgba(210,235,253,.95) 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(110,170,225,.8), inset 0 1px 0 #fff !important;
+  color: var(--color-ink-strong) !important;
+}
+html:root[data-theme="dark"] [data-part='menu'] {
+  border-color: rgba(130,200,255,.35) !important;
+  box-shadow: 0 10px 30px -6px rgba(0,0,0,.7), 0 0 18px -6px rgba(46,196,255,.4) !important;
+}
+html:root[data-theme="dark"] [role="menuitem"][data-highlighted],
+html:root[data-theme="dark"] [role="menuitemradio"][data-highlighted],
+html:root[data-theme="dark"] [role="menuitemcheckbox"][data-highlighted],
+html:root[data-theme="dark"] [role="option"][data-highlighted],
+html:root[data-theme="dark"] [role="option"][aria-selected="true"] {
+  background: var(--aero-pill) !important;
+  box-shadow: inset 0 0 0 1px var(--aero-pill-border), 0 0 8px var(--aero-glow) !important;
+}
+
+/* ---------------------------------------------------------------------
+   4. PASEK POSTĘPU WIN7 (zielony z przelatującym światłem)
+   --------------------------------------------------------------------- */
+[role="progressbar"] {
+  border-radius: 3px !important;
+  border: 1px solid rgba(80,100,120,.55) !important;
+  background: linear-gradient(180deg, #f3f3f3 0%, #dcdcdc 50%, #cfcfcf 51%, #e4e4e4 100%) !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.15) !important;
+  overflow: hidden;
+}
+[role="progressbar"] > * {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #c9f7bf 0%, #5ad94a 48%, #23a81c 52%, #4fcf3d 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7) !important;
+}
+[role="progressbar"] > *::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 120px;
+  left: -120px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.75), transparent);
+  animation: aero-progress 2.2s linear infinite;
+}
+progress {
+  appearance: none;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(80,100,120,.55);
+  background: linear-gradient(180deg, #f3f3f3 0%, #dcdcdc 50%, #cfcfcf 51%, #e4e4e4 100%);
+}
+progress::-webkit-progress-bar { background: transparent; }
+progress::-webkit-progress-value {
+  background: linear-gradient(180deg, #c9f7bf 0%, #5ad94a 48%, #23a81c 52%, #4fcf3d 100%);
+  border-radius: 2px;
+}
+@keyframes aero-progress { to { left: 110%; } }
+
+/* ---------------------------------------------------------------------
+   OKNA DIALOGOWE / USTAWIENIA W STYLU WINDOWS 7
+   --------------------------------------------------------------------- */
+html:root {
+  --aero-frame:
+    linear-gradient(115deg, transparent 0 30%, rgba(255,255,255,.28) 34%, transparent 40%, transparent 62%, rgba(255,255,255,.18) 66%, transparent 71%),
+    linear-gradient(180deg, rgba(185,225,250,.92) 0%, rgba(120,185,235,.86) 40%, rgba(100,170,225,.86) 60%, rgba(150,205,240,.9) 100%);
+  --aero-frame-border: rgba(20,60,110,.55);
+  --aero-dialog-bg: #ffffff;
+  --aero-title-glow: 0 0 8px #fff, 0 0 14px #fff, 0 0 20px rgba(255,255,255,.8);
+  --aero-pane: linear-gradient(180deg, #f2f8fd 0%, #dbeaf8 100%);
+  --aero-btn-gray: linear-gradient(180deg, #f2f2f2 0%, #ebebeb 48%, #dddddd 52%, #cfcfcf 100%);
+  --aero-btn-gray-hover: linear-gradient(180deg, #eaf6fd 0%, #d9f0fc 48%, #bee6fd 52%, #a7d9f5 100%);
+}
+html:root[data-theme="dark"] {
+  --aero-frame:
+    linear-gradient(115deg, transparent 0 30%, rgba(170,220,255,.14) 34%, transparent 40%, transparent 62%, rgba(170,220,255,.1) 66%, transparent 71%),
+    linear-gradient(180deg, rgba(60,110,170,.92) 0%, rgba(22,55,100,.9) 45%, rgba(12,36,72,.92) 55%, rgba(30,70,120,.92) 100%);
+  --aero-frame-border: rgba(140,205,255,.45);
+  --aero-dialog-bg: #0f2343;
+  --aero-title-glow: 0 0 10px rgba(46,196,255,.8), 0 0 18px rgba(46,196,255,.45);
+  --aero-pane: linear-gradient(180deg, rgba(30,62,105,.9) 0%, rgba(14,36,70,.9) 100%);
+  --aero-btn-gray: linear-gradient(180deg, #4a6d96 0%, #34557d 48%, #233f63 52%, #2d4d75 100%);
+  --aero-btn-gray-hover: linear-gradient(180deg, #5f8fc2 0%, #3e76ad 48%, #245c94 52%, #3a73aa 100%);
+}
+
+/* przyciemnione tło za oknem */
+.scrim {
+  backdrop-filter: blur(4px) saturate(120%);
+  background-color: rgba(20,60,110,.22) !important;
+}
+html:root[data-theme="dark"] .scrim { background-color: rgba(0,6,20,.5) !important; }
+
+/* podgląd zdjęcia / GIF-a: bez rozmycia i lżej, żeby było widać czat pod spodem.
+   Siłę przyciemnienia zmieniasz w --aero-media-scrim. */
+html:root { --aero-media-scrim: rgba(5,20,45,.45); }
+html:root[data-theme="dark"] { --aero-media-scrim: rgba(0,4,14,.5); }
+html:has(:is([data-part='dialog'], [role="alertdialog"])[data-state="open"]:not(:is(.w-dialog, .w-dialog-s, .max-w-dialog, .max-w-dialog-s, .w-settings, .w-profile, .w-picker, .w-reading, .max-w-reading, .w-card, .w-panel)):not([data-radix-popper-content-wrapper] *)) .scrim {
+  backdrop-filter: none;
+  background-color: var(--aero-media-scrim) !important;
+}
+
+/* gruba szklana ramka okna */
+:is([data-part='dialog'], [role="alertdialog"]):is(.w-dialog, .w-dialog-s, .max-w-dialog, .max-w-dialog-s, .w-settings, .w-profile, .w-picker, .w-reading, .max-w-reading, .w-card, .w-panel) {
+  border: 8px solid transparent !important;
+  border-radius: 10px !important;
+  background:
+    linear-gradient(var(--aero-dialog-bg), var(--aero-dialog-bg)) padding-box,
+    var(--aero-frame) border-box !important;
+  box-shadow:
+    0 0 0 1px var(--aero-frame-border),
+    inset 0 0 0 1px rgba(255,255,255,.45),
+    0 18px 50px -10px rgba(0,30,70,.55),
+    0 0 30px -10px var(--aero-glow) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* tytuł okna ze świecącą poświatą jak w Win7 */
+:is([data-part='dialog'], [role="alertdialog"]):is(.w-dialog, .w-dialog-s, .max-w-dialog, .max-w-dialog-s, .w-settings, .w-profile, .w-picker, .w-reading, .max-w-reading, .w-card, .w-panel) h2 {
+  text-shadow: var(--aero-title-glow);
+}
+
+/* krzyżyk zamknięcia w oknach: czerwony jak w Win7 */
+:is([data-part='dialog'], [role="alertdialog"]) button[aria-label^="Close"] {
+  color: #fff !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #f3b2a6 0%, #e37762 48%, #c83a1f 52%, #e0745a 100%) !important;
+  border: 1px solid #8f2a14 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6) !important;
+}
+:is([data-part='dialog'], [role="alertdialog"]) button[aria-label^="Close"]:hover {
+  background: linear-gradient(180deg, #ffc9bd 0%, #f5866d 48%, #e0401f 52%, #f78e6f 100%) !important;
+  box-shadow: 0 0 10px rgba(255,90,50,.65), inset 0 1px 0 rgba(255,255,255,.6) !important;
+}
+
+/* lewy panel ustawień jak w Panelu sterowania */
+[data-part='dialog'] .w-settings-nav {
+  background: var(--aero-pane) !important;
+  border-right: 1px solid rgba(110,160,210,.45) !important;
+}
+[data-part='dialog'] .w-settings-nav button:hover { background: var(--aero-hover) !important; }
+/* zaznaczona pozycja w menu ustawień (lewa kolumna): jasna pigułka, zawsze ciemny tekst */
+[data-part='dialog'] .w-settings-nav :is([role="tab"][data-state="active"], [aria-selected="true"], [aria-current="page"], button[data-state="active"]) {
+  background: var(--aero-pill) !important;
+  box-shadow: inset 0 0 0 1px var(--aero-pill-border), 0 0 8px var(--aero-glow) !important;
+  border-radius: 4px;
+  color: var(--color-ink-strong) !important;
+  text-shadow: none !important;
+}
+
+/* wybrana opcja w grupie przycisków (Input mode, Noise suppression, Density...):
+   wciśnięty niebieski przycisk Win7, biały tekst z ciemnym cieniem.
+   Łapie każdy sposób oznaczania zaznaczenia, bo nie zależy od jednego atrybutu. */
+html:root :is([role="radio"], [data-part='dialog'] button, [data-part='dialog'] [role="tab"], .w-settings button, .w-settings [role="tab"]):is([aria-checked="true"], [aria-pressed="true"], [aria-selected="true"], [data-state="on"], [data-state="checked"], [data-state="active"]):not(.w-settings-nav *):not([role="switch"], [role="checkbox"]) {
+  background: linear-gradient(180deg, #7fd0f7 0%, #2f9fe0 45%, #0f72c0 55%, #2a92d8 100%) !important;
+  border: 1px solid #0a5a9c !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0,35,80,.75) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.6),
+    inset 0 2px 6px rgba(0,40,100,.35),
+    0 0 12px 1px var(--aero-glow) !important;
+}
+html:root :is([role="radio"], [data-part='dialog'] button, [data-part='dialog'] [role="tab"], .w-settings button, .w-settings [role="tab"]):is([aria-checked="true"], [aria-pressed="true"], [aria-selected="true"], [data-state="on"], [data-state="checked"], [data-state="active"]):not(.w-settings-nav *):not([role="switch"], [role="checkbox"]) * {
+  color: inherit !important;
+}
+/* przesuwany podkład zaznaczenia (biały element pod tekstem, jak w Servers/Direct):
+   to on zasłaniał niebieskie tło, więc barwimy jego */
+html:root :is([role="radio"], [data-part='dialog'] button, [data-part='dialog'] [role="tab"], .w-settings button, .w-settings [role="tab"]):is([aria-checked="true"], [aria-pressed="true"], [aria-selected="true"], [data-state="on"], [data-state="checked"], [data-state="active"]):not(.w-settings-nav *):not([role="switch"], [role="checkbox"]) > span[aria-hidden="true"]:not(:has(svg)),
+[role="radiogroup"] > span[aria-hidden="true"]:not(:has(svg)) {
+  background: linear-gradient(180deg, #7fd0f7 0%, #2f9fe0 45%, #0f72c0 55%, #2a92d8 100%) !important;
+  border-radius: inherit !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 2px 6px rgba(0,40,100,.35) !important;
+  opacity: 1 !important;
+}
+
+/* zwykłe (szare) przyciski w oknach */
+[data-part='dialog'] button:is(.bg-hover, .bg-selected, .bg-surface-raised, [data-part='field']):not([role="switch"], [role="radio"], [role="checkbox"], [role="tab"], [aria-pressed="true"], [aria-checked="true"], [data-state="on"], [data-state="checked"], [data-state="active"]):not([aria-label^="Close"]) {
+  background: var(--aero-btn-gray) !important;
+  border: 1px solid rgba(112,112,112,.75) !important;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.55) !important;
+  color: var(--color-ink-strong);
+}
+[data-part='dialog'] button:is(.bg-hover, .bg-selected, .bg-surface-raised, [data-part='field']):not([role="switch"], [role="radio"], [role="checkbox"], [role="tab"], [aria-pressed="true"], [aria-checked="true"], [data-state="on"], [data-state="checked"], [data-state="active"]):not([aria-label^="Close"]):hover {
+  background: var(--aero-btn-gray-hover) !important;
+  border-color: #3c7fb1 !important;
+}
+
+/* przyciski "niebezpieczne" (usuń, wyjdź) */
+button.bg-danger {
+  background: linear-gradient(180deg, #ffb8a8 0%, #f0664a 48%, #cf2f12 52%, #e85c3d 100%) !important;
+  border: 1px solid #8f2a14 !important;
+  color: #fff !important;
+  text-shadow: 0 1px 1px rgba(80,10,0,.55);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px -2px rgba(200,50,20,.6) !important;
+}
+
+/* ---------------------------------------------------------------------
+   KONTROLKI: przełączniki, suwaki, checkboxy, radio
+   --------------------------------------------------------------------- */
+button[role="switch"] {
+  background: linear-gradient(180deg, #d6d6d6 0%, #f4f4f4 100%) !important;
+  border-color: transparent !important;
+  box-shadow: inset 0 0 0 1px rgba(90,110,130,.55), inset 0 1px 3px rgba(0,0,0,.25) !important;
+}
+button[role="switch"][data-state="checked"] {
+  background: var(--aero-green-btn) !important;
+  box-shadow: inset 0 0 0 1px #2b8a20, inset 0 1px 2px rgba(0,60,0,.3), 0 0 8px rgba(90,220,80,.5) !important;
+}
+button[role="switch"] > span {
+  background:
+    radial-gradient(circle at 38% 28%, #fff 0 18%, rgba(255,255,255,.2) 45%, transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #e2ecf5 50%, #c7d8e8 51%, #e6f0f8 100%) !important;
+  border: 0 !important;
+  box-shadow: inset 0 0 0 1px rgba(70,100,130,.55), 0 1px 3px rgba(0,40,80,.35) !important;
+}
+html:root[data-theme="dark"] button[role="switch"]:not([data-state="checked"]) {
+  background: linear-gradient(180deg, #081a35 0%, #1c3a62 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(130,200,255,.3), inset 0 1px 3px rgba(0,0,0,.4) !important;
+}
+
+[role="slider"] {
+  background:
+    radial-gradient(circle at 38% 28%, #fff 0 20%, rgba(255,255,255,.25) 45%, transparent 62%),
+    var(--aero-btn) !important;
+  border: 1px solid var(--aero-btn-border) !important;
+  box-shadow: 0 1px 4px rgba(0,50,110,.45), 0 0 8px var(--aero-glow) !important;
+}
+span:has(> [role="slider"]) ~ span,
+span:has(> span > [role="slider"]) > span:first-child {
+  box-shadow: inset 0 1px 2px rgba(0,40,90,.25);
+}
+
+button[role="checkbox"],
+button[role="radio"] {
+  background: linear-gradient(180deg, #e3e3e3 0%, #ffffff 100%) !important;
+  border: 1px solid #8e8f8f !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.9), inset 0 1px 2px rgba(0,0,0,.12) !important;
+}
+html:root[data-theme="dark"] button[role="checkbox"]:not([data-state="checked"], [data-state="on"], [aria-checked="true"]),
+html:root[data-theme="dark"] button[role="radio"]:not([data-state="checked"], [data-state="on"], [aria-checked="true"]) {
+  background: linear-gradient(180deg, #1f3c64 0%, #142b4c 50%, #0d213e 51%, #172f53 100%) !important;
+  border-color: rgba(130,200,255,.3) !important;
+  color: var(--color-ink-muted) !important;
+  box-shadow: inset 0 1px 0 rgba(170,225,255,.15) !important;
+}
+html:root[data-theme="dark"] button[role="checkbox"]:not([data-state="checked"], [data-state="on"], [aria-checked="true"]):hover,
+html:root[data-theme="dark"] button[role="radio"]:not([data-state="checked"], [data-state="on"], [aria-checked="true"]):hover {
+  background: linear-gradient(180deg, #2c5283 0%, #1d3e6a 50%, #142f56 51%, #22446f 100%) !important;
+  color: var(--color-ink-strong) !important;
+}
+button[role="checkbox"]:is([data-state="checked"], [data-state="on"], [aria-checked="true"]),
+html:root button[role="radio"]:is([data-state="checked"], [data-state="on"], [aria-checked="true"]) {
+  background: var(--aero-btn) !important;
+  border-color: var(--aero-btn-border) !important;
+  color: #fff !important;
+  text-shadow: 0 1px 1px rgba(0,50,100,.55);
+  box-shadow: 0 0 6px var(--aero-glow), inset 0 1px 0 rgba(255,255,255,.7) !important;
+}
+/* większe przyciski-opcje (np. Density): mocniejsza poświata wybranej */
+html:root button[role="radio"]:is([data-state="checked"], [data-state="on"], [aria-checked="true"]):not(:empty) {
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.6),
+    0 0 14px 2px var(--aero-glow),
+    0 0 28px 4px color-mix(in srgb, var(--aero-aqua) 35%, transparent),
+    inset 0 1px 0 rgba(255,255,255,.8) !important;
+}
+
+/* listy rozwijane (select) */
+button[role="combobox"] {
+  background: var(--aero-btn-gray) !important;
+  border: 1px solid rgba(112,112,112,.75) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.55) !important;
+}
+button[role="combobox"]:hover,
+button[role="combobox"][data-state="open"] {
+  background: var(--aero-btn-gray-hover) !important;
+  border-color: #3c7fb1 !important;
+}
+
+/* ---------------------------------------------------------------------
+   KONTRAST W JASNYM TRYBIE (bez przyciemniania tła)
+   --------------------------------------------------------------------- */
+/* obrazki, GIF-y i miniatury linków: ramka jak zdjęcie w Viście */
+[data-part='message'] :is(button[data-loaded], a[target="_blank"].rounded-lg:has(> img), video) {
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.95),
+    0 0 0 4px rgba(10,50,100,.38),
+    0 8px 22px -6px rgba(0,35,85,.6) !important;
+}
+html:root[data-theme="dark"] [data-part='message'] :is(button[data-loaded], a[target="_blank"].rounded-lg:has(> img), video) {
+  box-shadow:
+    0 0 0 1px rgba(150,215,255,.4),
+    0 8px 24px -6px rgba(0,0,0,.75) !important;
+}
+
+/* tekst wiadomości, nicki i godziny: biała poświata jak napisy na szkle w Win7 */
+html:root[data-theme="light"] main [data-part='message'] {
+  text-shadow: 0 0 1px #fff, 0 0 6px rgba(255,255,255,.85);
+}
+html:root[data-theme="light"] main [data-part='message'] span[title].font-bold {
+  text-shadow: 0 0 1px #fff, 0 0 4px #fff, 0 0 10px rgba(255,255,255,.9);
+}
+html:root[data-theme="light"] main [data-part='message'] time {
+  color: #3d5f82;
+}
+
+/* ---------------------------------------------------------------------
+   STATUSY: twoje ludziki zamiast kropek.
+   Obrazki (base64) są w zmiennych na samym końcu pliku.
+   --------------------------------------------------------------------- */
+[data-part='presence-dot'] {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  box-shadow: none !important;
+  filter: drop-shadow(0 0 1px #fff) drop-shadow(0 1px 2px rgba(0,30,70,.45));
+}
+/* w rogu awatara: większy i lekko wysunięty */
+[data-part='presence-dot'].absolute {
+  min-width: 18px;
+  min-height: 18px;
+  transform: translate(3px, 3px);
+}
+/* obok tekstu (chip "Online", profil): wielkość liczona od tekstu */
+[data-part='presence-dot']:not(.absolute) {
+  width: 1.15em !important;
+  height: 1.15em !important;
+  margin-block: -.15em;
+  margin-inline: 0 .2em;
+  flex-shrink: 0;
+}
+html:root[data-theme="dark"] [data-part='presence-dot'] {
+  filter: drop-shadow(0 0 1px rgba(190,225,255,.9)) drop-shadow(0 1px 3px rgba(0,0,0,.6));
+}
+[data-part='presence-dot']:is(.bg-online, [data-status='online'])  { background-image: var(--aero-st-online)  !important; }
+[data-part='presence-dot']:is(.bg-idle, [data-status='idle'])    { background-image: var(--aero-st-idle)    !important; }
+[data-part='presence-dot']:is(.bg-dnd, [data-status='dnd'])     { background-image: var(--aero-st-dnd)     !important; }
+[data-part='presence-dot']:is(.bg-offline, [data-status='offline']) { background-image: var(--aero-st-offline) !important; }
+/* pozostałe kropki statusu (menu "Set Status", profil, lista znajomych) */
+.rounded-full:is(.size-dot, .size-dot-s, .size-dot-l):is(.bg-online, .bg-idle, .bg-dnd, .bg-offline) {
+  width: 1.15em !important;
+  height: 1.15em !important;
+  margin-block: -.15em;
+  margin-inline: 0 .2em;
+  flex-shrink: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  filter: drop-shadow(0 0 1px #fff) drop-shadow(0 1px 2px rgba(0,30,70,.4));
+}
+html:root[data-theme="dark"] .rounded-full:is(.size-dot, .size-dot-s, .size-dot-l):is(.bg-online, .bg-idle, .bg-dnd, .bg-offline) {
+  filter: drop-shadow(0 0 1px rgba(190,225,255,.9)) drop-shadow(0 1px 3px rgba(0,0,0,.6));
+}
+.rounded-full:is(.size-dot, .size-dot-s, .size-dot-l).bg-online  { background: var(--aero-st-online)  center / contain no-repeat !important; }
+.rounded-full:is(.size-dot, .size-dot-s, .size-dot-l).bg-idle    { background: var(--aero-st-idle)    center / contain no-repeat !important; }
+.rounded-full:is(.size-dot, .size-dot-s, .size-dot-l).bg-dnd     { background: var(--aero-st-dnd)     center / contain no-repeat !important; }
+.rounded-full:is(.size-dot, .size-dot-s, .size-dot-l).bg-offline { background: var(--aero-st-offline) center / contain no-repeat !important; }
+
+[data-part='presence-dot']:is(.bg-online, [data-status='online']),
+[data-part='presence-dot']:is(.bg-idle, [data-status='idle']),
+[data-part='presence-dot']:is(.bg-dnd, [data-status='dnd']),
+[data-part='presence-dot']:is(.bg-offline, [data-status='offline']) {
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* ---------------------------------------------------------------------
+   TAPETA: wallpaper.jpg obok theme.css. Zdalne adresy są w paczkach blokowane.
+   --------------------------------------------------------------------- */
+html:root {
+  --aero-wallpaper: url("./wallpaper.jpg");
+  --aero-st-online: url("./status-online.png");
+  --aero-st-idle: url("./status-idle.png");
+  --aero-st-dnd: url("./status-dnd.png");
+  --aero-st-offline: url("./status-offline.png");
+
+}
+
+/* ---------------------------------------------------------------------
+   WZMIANKA @nick w treści wiadomości (data-part='mention')
+   --------------------------------------------------------------------- */
+[data-part='mention'] {
+  border-radius: 4px;
+  padding: 0 3px;
+  background: linear-gradient(180deg, rgba(200,240,255,.9), rgba(140,210,250,.75));
+  box-shadow: inset 0 0 0 1px rgba(40,140,210,.45), inset 0 1px 0 #fff;
+  color: #0b4f86;
+}
+:root[data-theme='dark'] [data-part='mention'] {
+  background: linear-gradient(180deg, rgba(60,140,220,.55), rgba(20,80,150,.55));
+  box-shadow: inset 0 0 0 1px rgba(120,200,255,.5), 0 0 6px rgba(46,196,255,.35);
+  color: #dff4ff;
+}
