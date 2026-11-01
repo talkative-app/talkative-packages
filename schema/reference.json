@@ -1,0 +1,507 @@
+{
+  "sounds": [
+    {
+      "event": "mute",
+      "note": "you mute your microphone",
+      "maxSeconds": 10
+    },
+    {
+      "event": "unmute",
+      "note": "you unmute your microphone",
+      "maxSeconds": 10
+    },
+    {
+      "event": "deafen",
+      "note": "you deafen yourself",
+      "maxSeconds": 10
+    },
+    {
+      "event": "undeafen",
+      "note": "you undeafen yourself",
+      "maxSeconds": 10
+    },
+    {
+      "event": "camera-on",
+      "note": "your camera turns on",
+      "maxSeconds": 10
+    },
+    {
+      "event": "camera-off",
+      "note": "your camera turns off",
+      "maxSeconds": 10
+    },
+    {
+      "event": "stream-watch",
+      "note": "you start watching a stream",
+      "maxSeconds": 10
+    },
+    {
+      "event": "stream-viewer-join",
+      "note": "someone starts watching your stream",
+      "maxSeconds": 10
+    },
+    {
+      "event": "stream-viewer-leave",
+      "note": "someone stops watching your stream",
+      "maxSeconds": 10
+    },
+    {
+      "event": "ring-out",
+      "note": "you call someone and it rings",
+      "maxSeconds": null
+    },
+    {
+      "event": "ring-in",
+      "note": "someone calls you",
+      "maxSeconds": null
+    },
+    {
+      "event": "channel-join",
+      "note": "someone joins the voice channel you are in",
+      "maxSeconds": 10
+    },
+    {
+      "event": "channel-leave",
+      "note": "someone leaves the voice channel you are in",
+      "maxSeconds": 10
+    },
+    {
+      "event": "self-join",
+      "note": "you join a voice channel or call",
+      "maxSeconds": 10
+    },
+    {
+      "event": "self-leave",
+      "note": "you leave a voice channel or call",
+      "maxSeconds": 10
+    },
+    {
+      "event": "stream-start",
+      "note": "you start streaming",
+      "maxSeconds": 10
+    },
+    {
+      "event": "stream-end",
+      "note": "you stop streaming",
+      "maxSeconds": 10
+    },
+    {
+      "event": "call-end",
+      "note": "the call you are in ends",
+      "maxSeconds": 10
+    },
+    {
+      "event": "call-declined",
+      "note": "the person you called declines",
+      "maxSeconds": 10
+    },
+    {
+      "event": "connection-lost",
+      "note": "the call connection drops",
+      "maxSeconds": 10
+    },
+    {
+      "event": "connection-back",
+      "note": "the call connection returns",
+      "maxSeconds": 10
+    },
+    {
+      "event": "message",
+      "note": "a message arrives",
+      "maxSeconds": 10
+    },
+    {
+      "event": "mention",
+      "note": "someone mentions you",
+      "maxSeconds": 10
+    },
+    {
+      "event": "direct-message",
+      "note": "a direct message arrives",
+      "maxSeconds": 10
+    },
+    {
+      "event": "message-sent",
+      "note": "you send a message",
+      "maxSeconds": 10
+    },
+    {
+      "event": "app-start",
+      "note": "the app starts",
+      "maxSeconds": 10
+    },
+    {
+      "event": "welcome",
+      "note": "the sign-in screen opens into the app",
+      "maxSeconds": 10
+    },
+    {
+      "event": "click",
+      "note": "anything clickable, and buttons when the pack has no button-click",
+      "maxSeconds": 1
+    },
+    {
+      "event": "button-click",
+      "note": "a button is clicked",
+      "maxSeconds": 1
+    }
+  ],
+  "parts": [
+    {
+      "name": "window-header",
+      "note": "the bar at the top of the window"
+    },
+    {
+      "name": "window-control",
+      "note": "the minimise, maximise and close buttons"
+    },
+    {
+      "name": "navigation",
+      "note": "the rail of servers and places"
+    },
+    {
+      "name": "place-switch",
+      "note": "the control that switches between places"
+    },
+    {
+      "name": "channel-list",
+      "note": "the channels of a server"
+    },
+    {
+      "name": "channel-row",
+      "note": "one channel in the list"
+    },
+    {
+      "name": "voice-members",
+      "note": "the people inside a voice channel"
+    },
+    {
+      "name": "member-list",
+      "note": "the members of a server"
+    },
+    {
+      "name": "user-panel",
+      "note": "your name, status and call controls under the sidebar"
+    },
+    {
+      "name": "message",
+      "note": "one message"
+    },
+    {
+      "name": "mention",
+      "note": "a mention inside a message"
+    },
+    {
+      "name": "composer",
+      "note": "the box where you write a message"
+    },
+    {
+      "name": "avatar",
+      "note": "the picture of a person"
+    },
+    {
+      "name": "presence-dot",
+      "note": "the status dot of a person"
+    },
+    {
+      "name": "menu",
+      "note": "menus and popovers"
+    },
+    {
+      "name": "dialog",
+      "note": "dialogs"
+    },
+    {
+      "name": "button-primary",
+      "note": "the main button of a dialog or form"
+    },
+    {
+      "name": "field",
+      "note": "a text field"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "data-theme",
+      "values": ["dark", "light"],
+      "note": "the mode in use"
+    },
+    {
+      "name": "data-context",
+      "values": ["servers", "direct", "call", "event"],
+      "note": "the place the app is in; it picks --color-tint"
+    },
+    {
+      "name": "data-motion",
+      "values": ["reduced"],
+      "note": "set when the person asks for less motion"
+    },
+    {
+      "name": "data-performance",
+      "values": ["on"],
+      "note": "set in performance mode"
+    }
+  ],
+  "tokens": [
+    {
+      "name": "--color-canvas",
+      "dark": "#08090d",
+      "light": "#e4e3ec"
+    },
+    {
+      "name": "--color-panel",
+      "dark": "#0a0b10",
+      "light": "#ecebf2"
+    },
+    {
+      "name": "--color-surface",
+      "dark": "#101118",
+      "light": "#f7f6fa"
+    },
+    {
+      "name": "--color-surface-raised",
+      "dark": "#1b1c27",
+      "light": "#ffffff"
+    },
+    {
+      "name": "--color-card",
+      "dark": "rgb(25 26 37 / 0.72)",
+      "light": "rgb(255 255 255 / 0.78)"
+    },
+    {
+      "name": "--color-field",
+      "dark": "#15161f",
+      "light": "#eeedf4"
+    },
+    {
+      "name": "--color-line",
+      "dark": "rgb(255 255 255 / 0.07)",
+      "light": "rgb(28 30 60 / 0.09)"
+    },
+    {
+      "name": "--color-edge",
+      "dark": "rgb(255 255 255 / 0.14)",
+      "light": "rgb(255 255 255 / 0.9)"
+    },
+    {
+      "name": "--color-ink-strong",
+      "dark": "#f3f4f9",
+      "light": "#1b1c2a"
+    },
+    {
+      "name": "--color-ink",
+      "dark": "#d0d2e0",
+      "light": "#3e4057"
+    },
+    {
+      "name": "--color-ink-muted",
+      "dark": "#b0b3c8",
+      "light": "#5a5c73"
+    },
+    {
+      "name": "--color-ink-faint",
+      "dark": "#8487a0",
+      "light": "#6c6e86"
+    },
+    {
+      "name": "--color-channel",
+      "dark": "#b9bcd0",
+      "light": "#4a4c63"
+    },
+    {
+      "name": "--color-hover",
+      "dark": "rgb(255 255 255 / 0.06)",
+      "light": "rgb(28 30 60 / 0.06)"
+    },
+    {
+      "name": "--color-selected",
+      "dark": "rgb(255 255 255 / 0.1)",
+      "light": "rgb(28 30 60 / 0.1)"
+    },
+    {
+      "name": "--color-tint",
+      "dark": "var(--tint-servers)",
+      "light": null
+    },
+    {
+      "name": "--color-accent",
+      "dark": "var(--color-tint)",
+      "light": null
+    },
+    {
+      "name": "--color-servers",
+      "dark": "var(--tint-servers)",
+      "light": null
+    },
+    {
+      "name": "--color-direct",
+      "dark": "var(--tint-direct)",
+      "light": null
+    },
+    {
+      "name": "--color-voice",
+      "dark": "#46b57a",
+      "light": "#2fa066"
+    },
+    {
+      "name": "--color-voice-ink",
+      "dark": "#46b57a",
+      "light": "#1b6e44"
+    },
+    {
+      "name": "--color-joined",
+      "dark": "var(--tint-joined)",
+      "light": null
+    },
+    {
+      "name": "--color-online",
+      "dark": "#46b57a",
+      "light": "#2fa066"
+    },
+    {
+      "name": "--color-idle",
+      "dark": "#e2b33c",
+      "light": null
+    },
+    {
+      "name": "--color-dnd",
+      "dark": "#e5484d",
+      "light": null
+    },
+    {
+      "name": "--color-offline",
+      "dark": "#6f7289",
+      "light": null
+    },
+    {
+      "name": "--color-pending",
+      "dark": "#e2b33c",
+      "light": null
+    },
+    {
+      "name": "--color-danger",
+      "dark": "#ef6b6b",
+      "light": null
+    },
+    {
+      "name": "--color-warning",
+      "dark": "#e2b33c",
+      "light": "#9a6212"
+    },
+    {
+      "name": "--color-notice",
+      "dark": "rgb(226 179 60 / 0.2)",
+      "light": "rgb(250 200 70 / 0.34)"
+    },
+    {
+      "name": "--color-notice-line",
+      "dark": "rgb(226 179 60 / 0.38)",
+      "light": "rgb(214 158 30 / 0.42)"
+    },
+    {
+      "name": "--color-live",
+      "dark": "#e5484d",
+      "light": null
+    },
+    {
+      "name": "--color-event",
+      "dark": "var(--tint-event)",
+      "light": null
+    },
+    {
+      "name": "--color-event-steady",
+      "dark": "var(--event-base)",
+      "light": null
+    },
+    {
+      "name": "--color-event-ink",
+      "dark": "color-mix(in srgb, var(--tint-event) 65%, white)",
+      "light": "color-mix(in srgb, var(--tint-event) 80%, black)"
+    },
+    {
+      "name": "--color-event-live",
+      "dark": "color-mix(in srgb, var(--tint-event) 82%, black)",
+      "light": "var(--tint-event)"
+    },
+    {
+      "name": "--color-crown",
+      "dark": "#e2b33c",
+      "light": null
+    },
+    {
+      "name": "--color-link",
+      "dark": "#8cb4ff",
+      "light": "#3d63c9"
+    },
+    {
+      "name": "--color-menu",
+      "dark": "#1b1c27",
+      "light": "#ffffff"
+    },
+    {
+      "name": "--color-scrim",
+      "dark": "rgb(5 6 12 / 0.6)",
+      "light": "rgb(30 30 60 / 0.25)"
+    },
+    {
+      "name": "--color-on-accent",
+      "dark": "#ffffff",
+      "light": null
+    },
+    {
+      "name": "--elevation-sm",
+      "dark": "0 10px 30px -16px rgb(6 5 24 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.04)",
+      "light": "0 1px 2px rgb(30 30 70 / 0.05), 0 10px 28px -16px rgb(30 30 70 / 0.22)"
+    },
+    {
+      "name": "--elevation-md",
+      "dark": "0 12px 30px -12px rgb(6 5 24 / 0.65)",
+      "light": "0 10px 28px -12px rgb(30 30 70 / 0.25)"
+    },
+    {
+      "name": "--elevation-field",
+      "dark": "0 12px 30px -12px rgb(6 5 24 / 0.65)",
+      "light": "0 1px 2px rgb(30 30 70 / 0.06)"
+    },
+    {
+      "name": "--elevation-lg",
+      "dark": "0 24px 60px -16px rgb(6 5 24 / 0.7)",
+      "light": "0 24px 60px -16px rgb(30 30 70 / 0.3)"
+    },
+    {
+      "name": "--elevation-key",
+      "dark": "inset 0 1px 0 rgb(255 255 255 / 0.07), inset 0 -2px 0 rgb(6 5 24 / 0.35), 0 1px 2px rgb(6 5 24 / 0.35)",
+      "light": "inset 0 -2px 0 rgb(30 30 70 / 0.1), 0 1px 2px rgb(30 30 70 / 0.12)"
+    },
+    {
+      "name": "--tint-servers",
+      "dark": "#8a7fdb",
+      "light": null
+    },
+    {
+      "name": "--tint-direct",
+      "dark": "#3ba596",
+      "light": null
+    },
+    {
+      "name": "--tint-call",
+      "dark": "#43ad74",
+      "light": null
+    },
+    {
+      "name": "--tint-joined",
+      "dark": "var(--color-voice)",
+      "light": null
+    },
+    {
+      "name": "--event-base",
+      "dark": "#4a8be0",
+      "light": "#2f6fd0"
+    },
+    {
+      "name": "--tint-event",
+      "dark": "var(--event-base)",
+      "light": null
+    }
+  ]
+}
