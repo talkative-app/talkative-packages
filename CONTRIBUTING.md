@@ -16,7 +16,7 @@ Thank you for adding to the official repository. A package is a theme, a sound p
    npm test
    ```
 
-5. Open a pull request titled `feat: <your-id> 1.0.0` (see [Titles](#titles)). The `check` job
+5. Open a pull request titled `add-package: <your-id> 1.0.0` (see [Titles](#titles)). The `check` job
    runs the same checks on the pull request; the maintainer reviews it.
 6. Once merged, `publish` puts the package in `catalog.json` on this repository's Pages address.
 
@@ -31,9 +31,8 @@ The pull request title becomes the commit on `main`, and the check holds it to t
 
 | Pull request                    | Title                                                                           |
 | ------------------------------- | ------------------------------------------------------------------------------- |
-| A new package                   | `feat: <id> <version>`                                                          |
-| A minor or major version        | `feat: <id> <version>`                                                          |
-| A patch version                 | `fix: <id> <version>`                                                           |
+| A new package                   | `add-package: <id> <version>`                                                   |
+| A new version of a package      | `update-package: <id> <version>`                                                |
 | Rules, scripts, workflows, docs | `feat:`, `fix:`, `docs:`, `chore:`, `ci:`, `refactor:` or `test:` and a summary |
 
 A package pull request changes only `packages/<id>/`, one package at a time. Every file of a

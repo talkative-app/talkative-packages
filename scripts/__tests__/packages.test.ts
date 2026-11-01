@@ -239,25 +239,18 @@ describe('pull requests', () => {
     );
   });
 
-  it('A package pull request is titled with its type, id and version', () => {
+  it('A package pull request is titled add-package or update-package with its id and version', () => {
     const fresh = { id: 'doe', before: null, after: '1.0.0' };
-    assert.equal(pullRequestTitle.problem('feat: doe 1.0.0', fresh), null);
+    const update = { id: 'doe', before: '1.0.0', after: '1.0.1' };
+    assert.equal(pullRequestTitle.problem('add-package: doe 1.0.0', fresh), null);
     assert.match(
-      pullRequestTitle.problem('package: doe 1.0.0', fresh) ?? '',
-      /"feat: doe 1\.0\.0"/,
+      pullRequestTitle.problem('feat: doe 1.0.0', fresh) ?? '',
+      /"add-package: doe 1\.0\.0"/,
     );
-    assert.equal(
-      pullRequestTitle.problem('fix: doe 1.0.1', { id: 'doe', before: '1.0.0', after: '1.0.1' }),
-      null,
-    );
-    assert.equal(
-      pullRequestTitle.problem('feat: doe 1.1.0', { id: 'doe', before: '1.0.0', after: '1.1.0' }),
-      null,
-    );
+    assert.equal(pullRequestTitle.problem('update-package: doe 1.0.1', update), null);
     assert.match(
-      pullRequestTitle.problem('feat: doe 1.0.1', { id: 'doe', before: '1.0.0', after: '1.0.1' }) ??
-        '',
-      /"fix: doe 1\.0\.1"/,
+      pullRequestTitle.problem('add-package: doe 1.0.1', update) ?? '',
+      /"update-package: doe 1\.0\.1"/,
     );
     assert.equal(pullRequestTitle.problem('ci: name actions', null), null);
     assert.match(pullRequestTitle.problem('Update stuff', null) ?? '', /needs a type/);

@@ -10,20 +10,12 @@ export class PullRequestTitle {
         : `The title "${title}" needs a type: feat, fix, docs, chore, ci, refactor or test, then ": ".`;
     }
 
-    const expected = `${this.#type(change)}: ${change.id} ${change.after}`;
+    const kind = change.before === null ? 'add-package' : 'update-package';
+    const expected = `${kind}: ${change.id} ${change.after}`;
 
     return title === expected
       ? null
       : `The title is "${title}"; this pull request is "${expected}".`;
-  }
-
-  #type({ before, after }: PackageChange): 'feat' | 'fix' {
-    if (before === null) return 'feat';
-
-    const [major, minor] = before.split('.');
-    const [nextMajor, nextMinor] = after.split('.');
-
-    return major === nextMajor && minor === nextMinor ? 'fix' : 'feat';
   }
 }
 
