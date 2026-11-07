@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schema/manifest.schema.json",
+  "id": "vaporwave",
+  "name": "Vaporwave",
+  "version": "1.0.0",
+  "author": "broski",
+  "licence": "CC-BY-NC-4.0",
+  "description": "Neonowy zachód słońca i siatka po horyzont. W dzień pastelowo.",
+  "talkative": ">=0.7.2",
+  "contents": {
+    "themes": {
+      "vaporwave": {
+        "name": "Vaporwave",
+        "modes": [
+          "light",
+          "dark"
+        ],
+        "colors": [
+          "#ff71ce",
+          "#01cdfe",
+          "#2b0b5c",
+          "#ffd6ec"
+        ]
+      }
+    },
+    "sounds": {
+      "vaporwave": {
+        "name": "Vaporwave",
+        "sounds": {
+          "app-start": "app-start.ogg",
+          "call-declined": "call-declined.ogg",
+          "call-end": "call-end.ogg",
+          "camera-off": "camera-off.ogg",
+          "camera-on": "camera-on.ogg",
+          "channel-join": "channel-join.ogg",
+          "channel-leave": "channel-leave.ogg",
+          "connection-back": "connection-back.ogg",
+          "connection-lost": "connection-lost.ogg",
+          "deafen": "deafen.ogg",
+          "direct-message": "direct-message.ogg",
+          "mention": "mention.ogg",
+          "message": "message.ogg",
+          "message-sent": "message-sent.ogg",
+          "mute": "mute.ogg",
+          "ring-in": "ring-in.ogg",
+          "ring-out": "ring-out.ogg",
+          "self-join": "self-join.ogg",
+          "self-leave": "self-leave.ogg",
+          "stream-end": "stream-end.ogg",
+          "stream-start": "stream-start.ogg",
+          "stream-viewer-join": "stream-viewer-join.ogg",
+          "stream-viewer-leave": "stream-viewer-leave.ogg",
+          "stream-watch": "stream-watch.ogg",
+          "undeafen": "undeafen.ogg",
+          "unmute": "unmute.ogg",
+          "welcome": "welcome.ogg"
+        }
+      }
+    }
+  },
+  "previews": []
+}
