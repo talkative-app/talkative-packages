@@ -1,0 +1,452 @@
+/* Retro 95 dla talkative
+   Fazowane ramki, granatowe paski tytułu, turkusowy pulpit, kwadratowe wszystko.
+   Jasny = klasyczna szarość, ciemny = wersja nocna w grafitach. */
+
+/* ---------------------------------------------------------------- kolory */
+:root[data-theme] {
+  --r-face: #c0c0c0;
+  --r-hi: #ffffff;
+  --r-lite: #dfdfdf;
+  --r-shade: #808080;
+  --r-dark: #0a0a0a;
+  --r-paper: #ffffff;
+  --r-ink: #000000;
+  --r-ink-soft: #3c3c3c;
+  --r-sel: #000080;
+  --r-sel-ink: #ffffff;
+  --r-title-a: #000080;
+  --r-title-b: #1084d0;
+  --r-title-ink: #ffffff;
+  --r-title-off-a: #808080;
+  --r-title-off-b: #b5b5b5;
+  --r-desk: #008080;
+  --r-desk-dot: rgba(0, 0, 0, .07);
+  --r-tip: #ffffe1;
+
+  --r-raised: inset -1px -1px var(--r-dark), inset 1px 1px var(--r-hi), inset -2px -2px var(--r-shade), inset 2px 2px var(--r-lite);
+  --r-pressed: inset -1px -1px var(--r-hi), inset 1px 1px var(--r-dark), inset -2px -2px var(--r-lite), inset 2px 2px var(--r-shade);
+  --r-sunken: inset -1px -1px var(--r-hi), inset 1px 1px var(--r-shade), inset -2px -2px var(--r-lite), inset 2px 2px var(--r-dark);
+  --r-well: inset -1px -1px var(--r-hi), inset 1px 1px var(--r-shade);
+
+  color-scheme: light;
+  --font-sans: "Microsoft Sans Serif", "MS Sans Serif", Tahoma, "Segoe UI", sans-serif;
+
+  --color-canvas: var(--r-desk);
+  --color-surface: var(--r-face);
+  --color-raised: var(--r-face);
+  --color-surface-raised: var(--r-face);
+  --color-panel: var(--r-face);
+  --color-card: var(--r-face);
+  --color-menu: var(--r-face);
+  --color-field: var(--r-paper);
+  --color-tray: var(--r-face);
+  --color-line: var(--r-shade);
+  --color-edge: var(--r-hi);
+  --color-ink-strong: var(--r-ink);
+  --color-ink: var(--r-ink);
+  --color-ink-muted: var(--r-ink-soft);
+  --color-ink-faint: #555555;
+  --color-ink-disabled: var(--r-shade);
+  --color-channel: var(--r-ink);
+  --color-hover: transparent;
+  --color-selected: var(--r-sel);
+  --tint-servers: #000080;
+  --tint-talk: #008000;
+  --tint-events: #800080;
+  --color-tint: #000080;
+  --color-danger: #c00000;
+  --color-warning: #c0a000;
+  --color-link: #0000ee;
+  --color-scrim: rgba(0, 0, 0, .25);
+  --color-on-accent: #ffffff;
+  --elevation-sm: none;
+  --elevation-md: none;
+  --elevation-lg: 2px 2px 0 rgba(0, 0, 0, .55);
+  --elevation-field: none;
+  --elevation-tray: none;
+  --elevation-key: none;
+  --blur-glass: 0px;
+  --wall: transparent;
+}
+
+:root[data-theme='dark'] {
+  --r-face: #3b3d42;
+  --r-hi: #6e727b;
+  --r-lite: #50535a;
+  --r-shade: #1f2024;
+  --r-dark: #000000;
+  --r-paper: #1b1c1f;
+  --r-ink: #e8e8e8;
+  --r-ink-soft: #b9bcc4;
+  --r-sel: #2b3fa8;
+  --r-sel-ink: #ffffff;
+  --r-title-a: #10184f;
+  --r-title-b: #3554c9;
+  --r-title-off-a: #2a2c31;
+  --r-title-off-b: #4a4d55;
+  --r-desk: #0b3b40;
+  --r-desk-dot: rgba(0, 0, 0, .22);
+  --r-tip: #2d2b1c;
+  color-scheme: dark;
+  --color-ink-faint: #9a9da6;
+  --color-link: #8fb0ff;
+  --tint-talk: #3cc44a;
+  --color-danger: #ff5b5b;
+  --color-warning: #e6c23a;
+  --color-scrim: rgba(0, 0, 0, .5);
+}
+
+/* --------------------------------------------- kwadratowo i bez wygładzeń */
+:root[data-theme] *:not([data-part='presence-dot']) {
+  border-radius: 0 !important;
+}
+:root[data-theme] body {
+  font-family: var(--font-sans);
+  /* pulpit z delikatnym ditheringiem */
+  background:
+    conic-gradient(var(--r-desk-dot) 25%, transparent 0 50%, var(--r-desk-dot) 0 75%, transparent 0) 0 0 / 4px 4px,
+    var(--r-desk) !important;
+}
+
+/* ----------------------------------------------------------- okna/panele */
+[data-part='navigation'],
+[data-part='member-list'] {
+  background: var(--r-face) !important;
+  box-shadow: var(--r-raised), 2px 2px 0 rgba(0, 0, 0, .35) !important;
+  border: 0 !important;
+  margin: 6px;
+}
+:root[data-theme] #root,
+:root[data-theme] #root > * { background-color: transparent; }
+/* panel użytkownika: zwykła szara belka zamiast gradientu z okładki */
+[data-part='user-panel'] {
+  background: var(--r-face) !important;
+  box-shadow: var(--r-sunken) !important;
+  border: 0 !important;
+}
+[data-part='user-panel'] :is([class*='from-'], [class*='bg-gradient']) { background: none !important; }
+main {
+  background: var(--r-paper) !important;
+  box-shadow: var(--r-sunken), 0 0 0 3px var(--r-face), 0 0 0 4px var(--r-hi), 2px 2px 0 5px rgba(0, 0, 0, .35) !important;
+  margin: 10px 8px;
+}
+
+/* pasek tytułu */
+[data-part='window-header'] {
+  background: linear-gradient(90deg, var(--r-title-a), var(--r-title-b)) !important;
+  color: var(--r-title-ink) !important;
+  border: 0 !important;
+  box-shadow: inset 0 -1px var(--r-shade) !important;
+}
+[data-part='window-header'] * { color: var(--r-title-ink); }
+[data-part='window-header'] :is(h1, h2, [class*='text-heading']) {
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+/* przyciski okna: małe szare kwadraty */
+[data-part='window-control'] {
+  margin: 4px 1px;
+  height: 18px !important;
+  width: 20px !important;
+  min-width: 0 !important;
+  background: var(--r-face) !important;
+  box-shadow: var(--r-raised) !important;
+  color: var(--r-ink) !important;
+}
+[data-part='window-control'] svg { width: 10px; height: 10px; stroke-width: 3; }
+[data-part='window-control']:active { box-shadow: var(--r-pressed) !important; }
+[data-part='window-control'][aria-label='Close'] { margin-left: 3px; margin-right: 4px; }
+
+/* ------------------------------------------------------------- przyciski */
+:root[data-theme] button:not([aria-current], [data-part='window-control'], [data-part='segmented-option'], [data-part='channel-row'], [role='switch'], [role='menuitem'], [role='menuitemradio'], [role='option'], [role='tab']):is(.bg-hover, .bg-selected, .bg-raised, .bg-surface-raised, .bg-tray, .bg-accent, [data-part='button-primary']) {
+  background: var(--r-face) !important;
+  color: var(--r-ink) !important;
+  box-shadow: var(--r-raised) !important;
+  border: 0 !important;
+  text-shadow: none !important;
+}
+:root[data-theme] button:is(.bg-hover, .bg-selected, .bg-raised, .bg-surface-raised, .bg-tray, .bg-accent, [data-part='button-primary']):active:not(:disabled) {
+  box-shadow: var(--r-pressed) !important;
+  translate: 1px 1px;
+}
+/* domyślny przycisk ma czarną obwódkę jak w oknach dialogowych */
+[data-part='button-primary'] {
+  outline: 1px solid var(--r-dark) !important;
+  outline-offset: 0;
+  font-weight: 700;
+}
+:root[data-theme] button:focus-visible {
+  outline: 1px dotted var(--r-ink) !important;
+  outline-offset: -5px !important;
+}
+
+/* przełącznik Servers/Direct jak zakładki */
+[data-part='place-switch'] {
+  background: var(--r-face) !important;
+  box-shadow: var(--r-sunken) !important;
+  padding: 3px !important;
+}
+[data-part='place-switch'] [aria-pressed='true'] > span[aria-hidden='true'],
+[data-part='place-switch'] span.bg-surface-raised,
+[data-part='place-switch'] span.bg-raised {
+  background: var(--r-face) !important;
+  box-shadow: var(--r-raised) !important;
+}
+[data-part='place-switch'] button { color: var(--r-ink) !important; }
+
+/* ----------------------------------------------------------------- listy */
+[data-part='channel-row'] {
+  color: var(--r-ink) !important;
+  background: transparent !important;
+}
+[data-part='channel-row']:hover { outline: 1px dotted var(--r-ink); outline-offset: -2px; }
+[data-part='channel-row']:is([aria-current='page'], :has([aria-current='page'])),
+[data-part='channel-list'] [aria-current='page'] {
+  background: var(--r-sel) !important;
+  color: var(--r-sel-ink) !important;
+}
+[data-part='channel-list'] [aria-current='page'] * { color: var(--r-sel-ink) !important; }
+[data-part='dialog'] [aria-current='page'] {
+  background: var(--r-sel) !important;
+  color: var(--r-sel-ink) !important;
+  box-shadow: none !important;
+}
+/* ikony i opisy na granatowym zaznaczeniu: białe, jak w Win95 */
+:is([data-part='dialog'], [data-part='channel-list']) [aria-current='page'] :is(*, svg) {
+  color: var(--r-sel-ink) !important;
+  stroke: currentColor;
+}
+
+/* jasny tryb: kolorowe ikony (np. słuchawka połączenia) czarne jak reszta,
+   zielony ginie na turkusowym pulpicie */
+:root[data-theme='light'] :is(button, a) :is(.text-talk, .text-online, .text-voice),
+:root[data-theme='light'] :is(button, a):is(.text-talk, .text-online, .text-voice) {
+  color: var(--r-ink) !important;
+}
+
+/* zaznaczenie i hover w menu/listach */
+:is([role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox'], [role='option']):is([data-highlighted], [aria-selected='true']) {
+  background: var(--r-sel) !important;
+  color: var(--r-sel-ink) !important;
+}
+:is([role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox'], [role='option']):is([data-highlighted], [aria-selected='true']) * {
+  color: var(--r-sel-ink) !important;
+}
+
+/* wiadomości: kropkowana ramka przy najechaniu, jak fokus w Win95 */
+[data-part='message']:hover {
+  background: transparent !important;
+  outline: 1px dotted var(--r-shade);
+  outline-offset: -1px;
+}
+[data-part='mention'] {
+  background: var(--r-sel) !important;
+  color: var(--r-sel-ink) !important;
+  padding: 0 2px;
+}
+:root[data-theme] [data-part='message'][data-mentioned='true'] {
+  background: var(--r-tip) !important;
+}
+
+/* ------------------------------------------------- awatary i statusy LED */
+[data-part='avatar'] {
+  box-shadow: var(--r-sunken) !important;
+  padding: 2px;
+  background: var(--r-face) !important;
+}
+[data-part='avatar'] > * { border-radius: 0 !important; }
+[data-part='presence-dot'] {
+  border-radius: 0 !important;
+  border: 1px solid var(--r-dark) !important;
+  box-shadow: inset 1px 1px rgba(255, 255, 255, .55), inset -1px -1px rgba(0, 0, 0, .35) !important;
+}
+[data-part='presence-dot']:is(.bg-talk, .bg-online) { background: #00c000 !important; }
+[data-part='presence-dot']:is(.bg-warning, .bg-idle) { background: #f0c800 !important; }
+[data-part='presence-dot']:is(.bg-danger, .bg-dnd) { background: #e00000 !important; }
+[data-part='presence-dot']:is(.bg-ink-faint, .bg-offline) { background: #808080 !important; }
+[data-part='presence-dot'].absolute {
+  width: 9px !important;
+  height: 9px !important;
+  right: -1px !important;
+  bottom: -1px !important;
+}
+[data-part='presence-dot']:not(.absolute) {
+  width: 10px !important;
+  height: 10px !important;
+}
+
+/* ----------------------------------------------------------------- pola */
+[data-part='composer'],
+[data-part='field'],
+:root[data-theme] input[type='text'],
+:root[data-theme] input[type='search'],
+:root[data-theme] textarea {
+  background: var(--r-paper) !important;
+  color: var(--r-ink) !important;
+  box-shadow: var(--r-sunken) !important;
+  border: 0 !important;
+}
+[data-part='composer'] { margin: 4px 6px 6px !important; }
+
+/* -------------------------------------------------- menu i okna dialogowe */
+[data-part='menu'] {
+  background: var(--r-face) !important;
+  box-shadow: var(--r-raised), 2px 2px 0 rgba(0, 0, 0, .45) !important;
+  border: 0 !important;
+  padding: 3px !important;
+  backdrop-filter: none !important;
+}
+[data-part='dialog'] {
+  position: fixed;
+  background: var(--r-face) !important;
+  box-shadow: var(--r-raised), 3px 3px 0 rgba(0, 0, 0, .5) !important;
+  border: 0 !important;
+  padding-top: 22px !important;
+  backdrop-filter: none !important;
+}
+/* pasek tytułu okna dialogowego */
+[data-part='dialog']::before {
+  content: 'talkative';
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  top: 3px;
+  height: 18px;
+  padding-left: 6px;
+  display: flex;
+  align-items: center;
+  font: 700 12px/1 var(--font-sans);
+  color: var(--r-title-ink);
+  background: linear-gradient(90deg, var(--r-title-a), var(--r-title-b));
+  pointer-events: none;
+  z-index: 1;
+}
+[data-part='dialog'] button[aria-label^='Close'] {
+  background: var(--r-face) !important;
+  box-shadow: var(--r-raised) !important;
+  color: var(--r-ink) !important;
+}
+.scrim { backdrop-filter: none !important; }
+
+/* tooltipy: żółta karteczka */
+[data-radix-popper-content-wrapper] > :has([role='tooltip']) {
+  background: var(--r-tip) !important;
+  color: var(--r-ink) !important;
+  border: 1px solid var(--r-dark) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* ------------------------------------------------------- wybór opcji */
+[data-part='segmented'] {
+  background: var(--r-face) !important;
+  box-shadow: none !important;
+  gap: 2px !important;
+  padding: 0 !important;
+}
+[data-part='segmented-option'] {
+  background: var(--r-face) !important;
+  box-shadow: var(--r-raised) !important;
+  color: var(--r-ink) !important;
+}
+[data-part='segmented-option'][data-state='checked'] {
+  background:
+    conic-gradient(var(--r-hi) 25%, transparent 0 50%, var(--r-hi) 0 75%, transparent 0) 0 0 / 2px 2px,
+    var(--r-face) !important;
+  box-shadow: var(--r-pressed) !important;
+  font-weight: 700;
+}
+[data-part='segmented-option'][data-state='checked'] > * { translate: 1px 1px; }
+[data-part='segmented-highlight'] { opacity: 0 !important; }
+
+/* przełączniki jako pole wyboru z ptaszkiem */
+:root[data-theme] button[role='switch'],
+:root[data-theme] button[role='checkbox'] {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px;
+  padding: 0 !important;
+  background: var(--r-paper) !important;
+  box-shadow: var(--r-sunken) !important;
+  border: 0 !important;
+}
+:root[data-theme] button[role='switch'] > span { display: none !important; }
+:root[data-theme] button:is([role='switch'], [role='checkbox'])[data-state='checked'] {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1 4l2 2 4-5' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") center / 8px no-repeat,
+    var(--r-paper) !important;
+}
+:root[data-theme='dark'] button:is([role='switch'], [role='checkbox'])[data-state='checked'] {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1 4l2 2 4-5' fill='none' stroke='%23e8e8e8' stroke-width='1.6'/%3E%3C/svg%3E") center / 8px no-repeat,
+    var(--r-paper) !important;
+}
+:root[data-theme] [role='slider'] {
+  width: 11px !important;
+  height: 20px !important;
+  background: var(--r-face) !important;
+  box-shadow: var(--r-raised) !important;
+  border: 0 !important;
+}
+
+
+/* ------------------------------------------- pole wiadomości: jednolite */
+[data-part='composer'] :is(.bg-raised, .bg-surface-raised, .bg-surface, .bg-field, .bg-tray, .bg-card, .bg-hover):not(button) {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+[data-part='composer'] { padding: 2px !important; }
+
+/* ułożone na zakładkę awatary (np. Mutual Friends): przy kwadratach
+   rozsuwamy je na odstęp zamiast nakładać */
+:root[data-theme] [class*='-space-x-'] > * {
+  margin-inline: 0 3px !important;
+}
+[class*='-space-x-'] > :is(img, span, div) { box-shadow: var(--r-sunken) !important; padding: 1px; background: var(--r-face); }
+
+/* --------------------------------------------------- paski przewijania */
+:root[data-theme] ::-webkit-scrollbar { width: 16px; height: 16px; background: var(--r-face); }
+:root[data-theme] ::-webkit-scrollbar-track {
+  background: conic-gradient(var(--r-hi) 25%, var(--r-face) 0 50%, var(--r-hi) 0 75%, var(--r-face) 0) 0 0 / 2px 2px;
+}
+:root[data-theme] ::-webkit-scrollbar-thumb { background: var(--r-face); box-shadow: var(--r-raised); }
+:root[data-theme] ::-webkit-scrollbar-button:single-button {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: var(--r-face);
+  box-shadow: var(--r-raised);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+:root[data-theme] ::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 4'%3E%3Cpath d='M0 4h7L3.5 0z' fill='%23000'/%3E%3C/svg%3E");
+  background-size: 7px 4px;
+}
+:root[data-theme] ::-webkit-scrollbar-button:single-button:vertical:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 4'%3E%3Cpath d='M0 0h7L3.5 4z' fill='%23000'/%3E%3C/svg%3E");
+  background-size: 7px 4px;
+}
+:root[data-theme='dark'] ::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 4'%3E%3Cpath d='M0 4h7L3.5 0z' fill='%23e8e8e8'/%3E%3C/svg%3E");
+}
+:root[data-theme='dark'] ::-webkit-scrollbar-button:single-button:vertical:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 4'%3E%3Cpath d='M0 0h7L3.5 4z' fill='%23e8e8e8'/%3E%3C/svg%3E");
+}
+[data-radix-scroll-area-viewport] ~ [data-orientation='vertical'] {
+  width: 16px !important;
+  padding: 0 !important;
+  background: conic-gradient(var(--r-hi) 25%, var(--r-face) 0 50%, var(--r-hi) 0 75%, var(--r-face) 0) 0 0 / 2px 2px !important;
+}
+[data-radix-scroll-area-viewport] ~ [data-orientation='vertical'] > div {
+  background: var(--r-face) !important;
+  box-shadow: var(--r-raised) !important;
+}
+
+::selection { background: var(--r-sel); color: var(--r-sel-ink); }
+
+/* ------------------------------------------------------------ ruch */
+:root[data-motion='reduced'] *,
+:root[data-performance='on'] * { transition: none !important; animation: none !important; }
