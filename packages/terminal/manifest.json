@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schema/manifest.schema.json",
+  "id": "terminal",
+  "name": "Terminal",
+  "version": "1.0.0",
+  "author": "broski",
+  "licence": "CC-BY-NC-4.0",
+  "description": "Zielony fosfor w nocy, wydruk z drukarki igłowej w dzień.",
+  "talkative": ">=0.7.2",
+  "contents": {
+    "themes": {
+      "terminal": {
+        "name": "Terminal",
+        "modes": [
+          "light",
+          "dark"
+        ],
+        "colors": [
+          "#39ff6a",
+          "#030803",
+          "#fbfaf1",
+          "#dcefd9"
+        ]
+      }
+    },
+    "sounds": {
+      "terminal": {
+        "name": "Terminal",
+        "sounds": {
+          "app-start": "app-start.ogg",
+          "call-declined": "call-declined.ogg",
+          "call-end": "call-end.ogg",
+          "camera-off": "camera-off.ogg",
+          "camera-on": "camera-on.ogg",
+          "channel-join": "channel-join.ogg",
+          "channel-leave": "channel-leave.ogg",
+          "connection-back": "connection-back.ogg",
+          "connection-lost": "connection-lost.ogg",
+          "deafen": "deafen.ogg",
+          "direct-message": "direct-message.ogg",
+          "mention": "mention.ogg",
+          "message": "message.ogg",
+          "message-sent": "message-sent.ogg",
+          "mute": "mute.ogg",
+          "ring-in": "ring-in.ogg",
+          "ring-out": "ring-out.ogg",
+          "self-join": "self-join.ogg",
+          "self-leave": "self-leave.ogg",
+          "stream-end": "stream-end.ogg",
+          "stream-start": "stream-start.ogg",
+          "stream-viewer-join": "stream-viewer-join.ogg",
+          "stream-viewer-leave": "stream-viewer-leave.ogg",
+          "stream-watch": "stream-watch.ogg",
+          "undeafen": "undeafen.ogg",
+          "unmute": "unmute.ogg",
+          "welcome": "welcome.ogg"
+        }
+      }
+    }
+  },
+  "previews": []
+}
