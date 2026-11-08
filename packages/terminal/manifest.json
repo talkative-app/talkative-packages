@@ -2,10 +2,10 @@
   "$schema": "../../schema/manifest.schema.json",
   "id": "terminal",
   "name": "Terminal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "broski",
   "licence": "CC-BY-NC-4.0",
-  "description": "Zielony fosfor w nocy, wydruk z drukarki igłowej w dzień.",
+  "description": "Motyw Terminal dla Talkative. Escape the Matrix.",
   "talkative": ">=0.7.2",
   "contents": {
     "themes": {
