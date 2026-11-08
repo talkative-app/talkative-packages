@@ -2,10 +2,10 @@
   "$schema": "../../schema/manifest.schema.json",
   "id": "retro-95",
   "name": "Retro 95",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "broski",
   "licence": "CC-BY-NC-4.0",
-  "description": "Szare okna, granatowe paski i turkusowy pulpit. Brakuje tylko dyskietek.",
+  "description": "Motyw Win95 dla Talkative. Bip bup stary komputer.",
   "talkative": ">=0.7.2",
   "contents": {
     "themes": {
