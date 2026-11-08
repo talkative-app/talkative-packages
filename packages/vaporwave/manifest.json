@@ -2,10 +2,10 @@
   "$schema": "../../schema/manifest.schema.json",
   "id": "vaporwave",
   "name": "Vaporwave",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "broski",
   "licence": "CC-BY-NC-4.0",
-  "description": "Neonowy zachód słońca i siatka po horyzont. W dzień pastelowo.",
+  "description": "Motyw Vaporwave dla Talkative. Zachód słońca nigdy się nie kończy.",
   "talkative": ">=0.7.2",
   "contents": {
     "themes": {
