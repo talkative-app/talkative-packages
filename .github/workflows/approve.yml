@@ -1,0 +1,44 @@
+name: approve
+
+on:
+  workflow_run:
+    workflows: [check]
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  approve:
+    name: Approve a maintainer's own package
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 26
+          cache: npm
+      - run: npm ci
+      - id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+        run: echo "number=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --json number,headRefOid -q '.[] | select(.headRefOid == env.SHA) | .number')" >> "$GITHUB_OUTPUT"
+      - id: rule
+        if: steps.pr.outputs.number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ steps.pr.outputs.number }}
+        run: node scripts/approve.ts
+      - if: steps.rule.outputs.approve == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ steps.pr.outputs.number }}
+        run: |
+          gh pr review "$PR" --repo "$GITHUB_REPOSITORY" --approve --body "Every package here is maintained by its author."
+          gh pr merge "$PR" --repo "$GITHUB_REPOSITORY" --auto --squash
