@@ -1,0 +1,26 @@
+{
+  "$schema": "../../schema/manifest.schema.json",
+  "id": "teamtalk",
+  "name": "TeamTalk",
+  "version": "1.0.0",
+  "author": "talkative",
+  "maintainers": ["MarioPeperoni"],
+  "licence": "CC0-1.0",
+  "description": "A desktop voice client of the late 2000s: grey window chrome, a white channel tree with its lines, compact rows, bevelled buttons, the blue selection and small coloured icons.",
+  "talkative": ">=0.7.2",
+  "contents": {
+    "themes": {
+      "teamtalk": {
+        "name": "TeamTalk",
+        "modes": ["light", "dark"],
+        "colors": ["#f0f0f0", "#1c6fb8", "#cce8ff", "#2d2d30"]
+      }
+    }
+  },
+  "previews": [
+    { "file": "previews/server-light.png", "title": "Server channel, light" },
+    { "file": "previews/server-dark.png", "title": "Server channel, dark" },
+    { "file": "previews/friends-light.png", "title": "Friends, light" },
+    { "file": "previews/settings-dark.png", "title": "Settings, dark" }
+  ]
+}
