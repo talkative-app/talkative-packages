@@ -1,0 +1,215 @@
+/* shadcn for talkative
+   The default shadcn/ui look in its neutral palette: hairline borders, a 0.5rem radius,
+   a ring on focus and flat buttons. Colours from shadcn/ui (MIT). */
+
+:root[data-theme] {
+  color-scheme: light;
+  --sh-background: #ffffff;
+  --sh-foreground: #0a0a0a;
+  --sh-card: #ffffff;
+  --sh-primary: #171717;
+  --sh-primary-foreground: #fafafa;
+  --sh-muted: #f5f5f5;
+  --sh-muted-foreground: #737373;
+  --sh-accent: #f5f5f5;
+  --sh-border: #e5e5e5;
+  --sh-input: #e5e5e5;
+  --sh-ring: #a1a1a1;
+  --sh-destructive: #e7000b;
+  --sh-radius: 0.5rem;
+  --sh-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --sh-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --sh-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --font-sans: Geist, Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --color-canvas: var(--sh-background);
+  --color-surface: var(--sh-background);
+  --color-raised: var(--sh-card);
+  --color-field: var(--sh-background);
+  --color-tray: var(--sh-muted);
+  --color-line: var(--sh-border);
+  --color-edge: var(--sh-border);
+  --color-ink-strong: var(--sh-foreground);
+  --color-ink: var(--sh-foreground);
+  --color-ink-muted: var(--sh-muted-foreground);
+  --color-ink-faint: var(--sh-muted-foreground);
+  --color-ink-disabled: rgb(115 115 115 / 0.5);
+  --color-hover: var(--sh-accent);
+  --color-selected: var(--sh-accent);
+  --tint-servers: var(--sh-primary);
+  --tint-talk: var(--sh-primary);
+  --tint-events-base: var(--sh-primary);
+  --color-danger: var(--sh-destructive);
+  --color-warning: #d97706;
+  --color-scrim: rgb(0 0 0 / 0.5);
+  --color-on-accent: var(--sh-primary-foreground);
+  --elevation-sm: var(--sh-shadow-xs);
+  --elevation-md: var(--sh-shadow-md);
+  --elevation-field: var(--sh-shadow-xs);
+  --elevation-lg: var(--sh-shadow-lg);
+  --elevation-tray: none;
+  --elevation-key: var(--sh-shadow-xs);
+  --wall: var(--sh-background);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --sh-background: #0a0a0a;
+  --sh-foreground: #fafafa;
+  --sh-card: #171717;
+  --sh-primary: #e5e5e5;
+  --sh-primary-foreground: #171717;
+  --sh-muted: #262626;
+  --sh-muted-foreground: #a1a1a1;
+  --sh-accent: #262626;
+  --sh-border: rgb(255 255 255 / 0.1);
+  --sh-input: rgb(255 255 255 / 0.15);
+  --sh-ring: #737373;
+  --sh-destructive: #ff6467;
+  --color-ink-disabled: rgb(161 161 161 / 0.5);
+}
+
+:root[data-theme] body {
+  font-family: var(--font-sans);
+  background: var(--sh-background) !important;
+}
+
+[data-part='window-header'] {
+  background: var(--sh-background) !important;
+  border-bottom: 1px solid var(--sh-border) !important;
+  box-shadow: none !important;
+}
+[data-part='navigation'] {
+  background: var(--sh-background) !important;
+  border-right: 1px solid var(--sh-border) !important;
+  box-shadow: none !important;
+}
+[data-part='channel-row'] {
+  border-radius: calc(var(--sh-radius) - 2px) !important;
+  font-weight: 500 !important;
+}
+[data-part='channel-row']::before {
+  display: none !important;
+}
+[data-part='member-list'] {
+  background: var(--sh-background) !important;
+  border: 0 !important;
+  border-left: 1px solid var(--sh-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+[data-part='user-panel'] {
+  background: var(--sh-card) !important;
+  border: 1px solid var(--sh-border) !important;
+  border-radius: var(--sh-radius) !important;
+  box-shadow: var(--sh-shadow-xs) !important;
+}
+[data-part='user-panel'] :is([class*='from-'], [class*='bg-gradient']) {
+  background: none !important;
+}
+
+[data-part='message']:hover {
+  background: var(--sh-muted) !important;
+}
+[data-part='mention'] {
+  background: var(--sh-muted) !important;
+  color: var(--sh-foreground) !important;
+  border-radius: calc(var(--sh-radius) - 4px) !important;
+  font-weight: 500;
+}
+[data-part='composer'] [data-composer-frame] {
+  background: var(--sh-background) !important;
+  border: 1px solid var(--sh-input) !important;
+  border-radius: var(--sh-radius) !important;
+  box-shadow: var(--sh-shadow-xs) !important;
+}
+[data-part='composer'] [data-composer-frame]:focus-within {
+  border-color: var(--sh-ring) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sh-ring) 50%, transparent) !important;
+}
+[data-part='composer'] button:has(> svg.tabler-icon-send) {
+  border-radius: calc(var(--sh-radius) - 2px) !important;
+}
+
+[data-part='button-primary'] {
+  background: var(--sh-primary) !important;
+  color: var(--sh-primary-foreground) !important;
+  border: 0 !important;
+  border-radius: calc(var(--sh-radius) - 2px) !important;
+  box-shadow: var(--sh-shadow-xs) !important;
+  font-weight: 500 !important;
+}
+[data-part='button-primary']:hover {
+  background: color-mix(in srgb, var(--sh-primary) 90%, transparent) !important;
+  filter: none !important;
+}
+:root[data-theme] :focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sh-ring) 50%, transparent) !important;
+}
+
+[data-part='field'] {
+  background: transparent !important;
+  border: 1px solid var(--sh-input) !important;
+  border-radius: calc(var(--sh-radius) - 2px) !important;
+  box-shadow: var(--sh-shadow-xs) !important;
+}
+[data-part='field']:focus-within {
+  border-color: var(--sh-ring) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sh-ring) 50%, transparent) !important;
+}
+
+[data-part='segmented'] {
+  background: var(--sh-muted) !important;
+  border: 0 !important;
+  border-radius: var(--sh-radius) !important;
+  box-shadow: none !important;
+  padding: 3px !important;
+}
+[data-part='segmented-option'] {
+  color: var(--sh-muted-foreground) !important;
+  font-weight: 500 !important;
+}
+[data-part='segmented-option'][data-state='checked'] {
+  color: var(--sh-foreground) !important;
+}
+[data-part='segmented-highlight'] {
+  background: var(--sh-background) !important;
+  border-radius: calc(var(--sh-radius) - 2px) !important;
+  box-shadow: var(--sh-shadow-xs) !important;
+}
+:root[data-theme='dark'] [data-part='segmented-highlight'] {
+  background: var(--sh-input) !important;
+  border: 1px solid var(--sh-input) !important;
+}
+
+[data-part='menu'] {
+  background: var(--sh-card) !important;
+  border: 1px solid var(--sh-border) !important;
+  border-radius: calc(var(--sh-radius) - 2px) !important;
+  box-shadow: var(--sh-shadow-md) !important;
+  padding: 4px !important;
+}
+[data-part='menu'] [role='menuitem'] {
+  border-radius: calc(var(--sh-radius) - 4px) !important;
+}
+[data-part='menu'] [role='menuitem']:is(:hover, [data-highlighted]) {
+  background: var(--sh-accent) !important;
+}
+
+[data-part='dialog'] {
+  background: var(--sh-background) !important;
+  border: 1px solid var(--sh-border) !important;
+  border-radius: var(--sh-radius) !important;
+  box-shadow: var(--sh-shadow-lg) !important;
+}
+
+[data-part='presence-dot'] {
+  box-shadow: 0 0 0 2px var(--sh-background) !important;
+}
+
+main a[href] {
+  color: var(--sh-foreground) !important;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "../../schema/manifest.schema.json",
+  "id": "shadcn",
+  "name": "shadcn",
+  "version": "1.0.0",
+  "author": "talkative",
+  "maintainers": ["MarioPeperoni"],
+  "licence": "MIT",
+  "description": "The default shadcn/ui look in its neutral palette: hairline borders, a 0.5rem radius, a ring on focus and flat buttons, in dark and light.",
+  "talkative": ">=0.7.2",
+  "contents": {
+    "themes": {
+      "shadcn": {
+        "name": "shadcn",
+        "modes": ["light", "dark"],
+        "colors": ["#ffffff", "#171717", "#e5e5e5", "#0a0a0a"]
+      }
+    }
+  },
+  "previews": [
+    { "file": "previews/server-light.png", "title": "Server channel, light" },
+    { "file": "previews/server-dark.png", "title": "Server channel, dark" },
+    { "file": "previews/settings-light.png", "title": "Settings, light" },
+    { "file": "previews/friends-dark.png", "title": "Friends, dark" }
+  ]
+}
