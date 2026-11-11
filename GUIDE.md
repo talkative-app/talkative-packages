@@ -45,6 +45,7 @@ packages/<id>/
 | `id`              | the folder name: lower case letters, digits and `-`                                                                                                     |
 | `name`, `author`  | up to 64 characters each                                                                                                                                |
 | `version`         | `major.minor.patch`                                                                                                                                     |
+| `maintainers`     | optional GitHub logins who change the package without a review (see [CONTRIBUTING.md](CONTRIBUTING.md#maintainers)); the app ignores it                 |
 | `licence`         | optional, up to 64 characters                                                                                                                           |
 | `description`     | required, up to 400 characters; the package's main text in the app                                                                                      |
 | `talkative`       | the app versions it works with, e.g. `>=0.7`                                                                                                            |

@@ -25,6 +25,14 @@ Thank you for adding to the official repository. A package is a theme, a sound p
 Raise its `version` in `manifest.json`; the check refuses a change without one: the patch number
 for a fix, the minor or major number for something new.
 
+## Maintainers
+
+`maintainers` in `manifest.json` lists the GitHub logins that look after a package. Once its
+`check` is green, a pull request merges itself when its author is a maintainer of every package it
+touches, as listed on `main`, and it changes nothing outside `packages/`. A maintainer of any
+published package may also add a new package that lists them. Everything else waits for the
+maintainer's review, including a first package and a change to someone else's `maintainers`.
+
 ## Titles
 
 The pull request title becomes the commit on `main`, and the check holds it to these:
