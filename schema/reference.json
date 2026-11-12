@@ -319,12 +319,12 @@
     {
       "name": "--color-ink-faint",
       "dark": "#8487a0",
-      "light": "#6c6e86"
+      "light": "#626479"
     },
     {
       "name": "--color-ink-disabled",
       "dark": "rgb(132 135 160 / 0.6)",
-      "light": "rgb(108 110 134 / 0.6)"
+      "light": "rgb(98 100 121 / 0.6)"
     },
     {
       "name": "--color-hover",
@@ -359,12 +359,12 @@
     {
       "name": "--color-danger",
       "dark": "#ef6b6b",
-      "light": "#d13438"
+      "light": "#c02c2f"
     },
     {
       "name": "--color-warning",
       "dark": "#e2b33c",
-      "light": "#9a6212"
+      "light": "#8c5910"
     },
     {
       "name": "--color-scrim",
@@ -383,8 +383,8 @@
     },
     {
       "name": "--elevation-md",
-      "dark": "0 12px 30px -12px rgb(6 5 24 / 0.65)",
-      "light": "0 10px 28px -12px rgb(30 30 70 / 0.25)"
+      "dark": "0 1px 2px rgb(0 0 0 / 0.5), 0 14px 36px -12px rgb(0 0 0 / 0.7)",
+      "light": "0 1px 2px rgb(30 30 70 / 0.14), 0 14px 36px -14px rgb(30 30 70 / 0.3)"
     },
     {
       "name": "--elevation-field",
@@ -393,8 +393,8 @@
     },
     {
       "name": "--elevation-lg",
-      "dark": "0 24px 60px -16px rgb(6 5 24 / 0.7)",
-      "light": "0 24px 60px -16px rgb(30 30 70 / 0.3)"
+      "dark": "0 2px 4px rgb(0 0 0 / 0.45), 0 28px 64px -16px rgb(0 0 0 / 0.75)",
+      "light": "0 2px 4px rgb(30 30 70 / 0.12), 0 28px 64px -18px rgb(30 30 70 / 0.34)"
     },
     {
       "name": "--elevation-tray",
@@ -414,22 +414,724 @@
     {
       "name": "--tint-servers",
       "dark": "#8a7fdb",
-      "light": null
+      "light": "#6253cf"
     },
     {
       "name": "--tint-talk",
       "dark": "#46b57a",
-      "light": "#2fa066"
+      "light": "#227349"
     },
     {
       "name": "--tint-events-base",
       "dark": "#4a8be0",
-      "light": "#2f6fd0"
+      "light": "#2a64bb"
     },
     {
       "name": "--tint-events",
       "dark": "var(--tint-events-base)",
       "light": null
+    }
+  ],
+  "icons": [
+    {
+      "name": "adjustments-horizontal",
+      "selector": "svg.tabler-icon-adjustments-horizontal"
+    },
+    {
+      "name": "alert-circle",
+      "selector": "svg.tabler-icon-alert-circle"
+    },
+    {
+      "name": "alert-triangle",
+      "selector": "svg.tabler-icon-alert-triangle"
+    },
+    {
+      "name": "apple",
+      "selector": "svg.tabler-icon-apple"
+    },
+    {
+      "name": "arrow-back-up",
+      "selector": "svg.tabler-icon-arrow-back-up"
+    },
+    {
+      "name": "arrow-down",
+      "selector": "svg.tabler-icon-arrow-down"
+    },
+    {
+      "name": "arrow-down-left",
+      "selector": "svg.tabler-icon-arrow-down-left"
+    },
+    {
+      "name": "arrow-left",
+      "selector": "svg.tabler-icon-arrow-left"
+    },
+    {
+      "name": "arrow-right",
+      "selector": "svg.tabler-icon-arrow-right"
+    },
+    {
+      "name": "arrow-up-right",
+      "selector": "svg.tabler-icon-arrow-up-right"
+    },
+    {
+      "name": "arrows-exchange",
+      "selector": "svg.tabler-icon-arrows-exchange"
+    },
+    {
+      "name": "arrows-maximize",
+      "selector": "svg.tabler-icon-arrows-maximize"
+    },
+    {
+      "name": "arrows-minimize",
+      "selector": "svg.tabler-icon-arrows-minimize"
+    },
+    {
+      "name": "arrows-shuffle",
+      "selector": "svg.tabler-icon-arrows-shuffle"
+    },
+    {
+      "name": "at",
+      "selector": "svg.tabler-icon-at"
+    },
+    {
+      "name": "ban",
+      "selector": "svg.tabler-icon-ban"
+    },
+    {
+      "name": "bell",
+      "selector": "svg.tabler-icon-bell"
+    },
+    {
+      "name": "bell-off",
+      "selector": "svg.tabler-icon-bell-off"
+    },
+    {
+      "name": "bell-ringing",
+      "selector": "svg.tabler-icon-bell-ringing"
+    },
+    {
+      "name": "brand-android",
+      "selector": "svg.tabler-icon-brand-android"
+    },
+    {
+      "name": "brand-apple",
+      "selector": "svg.tabler-icon-brand-apple"
+    },
+    {
+      "name": "brand-bandcamp",
+      "selector": "svg.tabler-icon-brand-bandcamp"
+    },
+    {
+      "name": "brand-bluesky",
+      "selector": "svg.tabler-icon-brand-bluesky"
+    },
+    {
+      "name": "brand-facebook",
+      "selector": "svg.tabler-icon-brand-facebook"
+    },
+    {
+      "name": "brand-github",
+      "selector": "svg.tabler-icon-brand-github"
+    },
+    {
+      "name": "brand-gitlab",
+      "selector": "svg.tabler-icon-brand-gitlab"
+    },
+    {
+      "name": "brand-instagram",
+      "selector": "svg.tabler-icon-brand-instagram"
+    },
+    {
+      "name": "brand-kick",
+      "selector": "svg.tabler-icon-brand-kick"
+    },
+    {
+      "name": "brand-linkedin",
+      "selector": "svg.tabler-icon-brand-linkedin"
+    },
+    {
+      "name": "brand-patreon",
+      "selector": "svg.tabler-icon-brand-patreon"
+    },
+    {
+      "name": "brand-reddit",
+      "selector": "svg.tabler-icon-brand-reddit"
+    },
+    {
+      "name": "brand-soundcloud",
+      "selector": "svg.tabler-icon-brand-soundcloud"
+    },
+    {
+      "name": "brand-spotify",
+      "selector": "svg.tabler-icon-brand-spotify"
+    },
+    {
+      "name": "brand-steam",
+      "selector": "svg.tabler-icon-brand-steam"
+    },
+    {
+      "name": "brand-threads",
+      "selector": "svg.tabler-icon-brand-threads"
+    },
+    {
+      "name": "brand-tiktok",
+      "selector": "svg.tabler-icon-brand-tiktok"
+    },
+    {
+      "name": "brand-twitch",
+      "selector": "svg.tabler-icon-brand-twitch"
+    },
+    {
+      "name": "brand-windows",
+      "selector": "svg.tabler-icon-brand-windows"
+    },
+    {
+      "name": "brand-x",
+      "selector": "svg.tabler-icon-brand-x"
+    },
+    {
+      "name": "brand-youtube",
+      "selector": "svg.tabler-icon-brand-youtube"
+    },
+    {
+      "name": "broadcast",
+      "selector": "svg.tabler-icon-broadcast"
+    },
+    {
+      "name": "bug",
+      "selector": "svg.tabler-icon-bug"
+    },
+    {
+      "name": "bulb",
+      "selector": "svg.tabler-icon-bulb"
+    },
+    {
+      "name": "cake",
+      "selector": "svg.tabler-icon-cake"
+    },
+    {
+      "name": "calendar",
+      "selector": "svg.tabler-icon-calendar"
+    },
+    {
+      "name": "calendar-check",
+      "selector": "svg.tabler-icon-calendar-check"
+    },
+    {
+      "name": "calendar-event",
+      "selector": "svg.tabler-icon-calendar-event"
+    },
+    {
+      "name": "calendar-plus",
+      "selector": "svg.tabler-icon-calendar-plus"
+    },
+    {
+      "name": "calendar-x",
+      "selector": "svg.tabler-icon-calendar-x"
+    },
+    {
+      "name": "car",
+      "selector": "svg.tabler-icon-car"
+    },
+    {
+      "name": "chart-bar",
+      "selector": "svg.tabler-icon-chart-bar"
+    },
+    {
+      "name": "check",
+      "selector": "svg.tabler-icon-check"
+    },
+    {
+      "name": "checks",
+      "selector": "svg.tabler-icon-checks"
+    },
+    {
+      "name": "chevron-down",
+      "selector": "svg.tabler-icon-chevron-down"
+    },
+    {
+      "name": "chevron-left",
+      "selector": "svg.tabler-icon-chevron-left"
+    },
+    {
+      "name": "chevron-right",
+      "selector": "svg.tabler-icon-chevron-right"
+    },
+    {
+      "name": "chevron-up",
+      "selector": "svg.tabler-icon-chevron-up"
+    },
+    {
+      "name": "circle-check",
+      "selector": "svg.tabler-icon-circle-check"
+    },
+    {
+      "name": "circle-plus",
+      "selector": "svg.tabler-icon-circle-plus"
+    },
+    {
+      "name": "clipboard-check",
+      "selector": "svg.tabler-icon-clipboard-check"
+    },
+    {
+      "name": "clock",
+      "selector": "svg.tabler-icon-clock"
+    },
+    {
+      "name": "copy",
+      "selector": "svg.tabler-icon-copy"
+    },
+    {
+      "name": "crown",
+      "selector": "svg.tabler-icon-crown"
+    },
+    {
+      "name": "database",
+      "selector": "svg.tabler-icon-database"
+    },
+    {
+      "name": "device-desktop",
+      "selector": "svg.tabler-icon-device-desktop"
+    },
+    {
+      "name": "device-mobile",
+      "selector": "svg.tabler-icon-device-mobile"
+    },
+    {
+      "name": "device-mobile-filled",
+      "selector": "svg.tabler-icon-device-mobile-filled"
+    },
+    {
+      "name": "door-exit",
+      "selector": "svg.tabler-icon-door-exit"
+    },
+    {
+      "name": "dots",
+      "selector": "svg.tabler-icon-dots"
+    },
+    {
+      "name": "dots-vertical",
+      "selector": "svg.tabler-icon-dots-vertical"
+    },
+    {
+      "name": "download",
+      "selector": "svg.tabler-icon-download"
+    },
+    {
+      "name": "edit",
+      "selector": "svg.tabler-icon-edit"
+    },
+    {
+      "name": "external-link",
+      "selector": "svg.tabler-icon-external-link"
+    },
+    {
+      "name": "eye",
+      "selector": "svg.tabler-icon-eye"
+    },
+    {
+      "name": "eye-off",
+      "selector": "svg.tabler-icon-eye-off"
+    },
+    {
+      "name": "file",
+      "selector": "svg.tabler-icon-file"
+    },
+    {
+      "name": "file-code",
+      "selector": "svg.tabler-icon-file-code"
+    },
+    {
+      "name": "file-music",
+      "selector": "svg.tabler-icon-file-music"
+    },
+    {
+      "name": "file-text",
+      "selector": "svg.tabler-icon-file-text"
+    },
+    {
+      "name": "file-typography",
+      "selector": "svg.tabler-icon-file-typography"
+    },
+    {
+      "name": "file-zip",
+      "selector": "svg.tabler-icon-file-zip"
+    },
+    {
+      "name": "flag",
+      "selector": "svg.tabler-icon-flag"
+    },
+    {
+      "name": "fold",
+      "selector": "svg.tabler-icon-fold"
+    },
+    {
+      "name": "folder",
+      "selector": "svg.tabler-icon-folder"
+    },
+    {
+      "name": "folder-plus",
+      "selector": "svg.tabler-icon-folder-plus"
+    },
+    {
+      "name": "gauge",
+      "selector": "svg.tabler-icon-gauge"
+    },
+    {
+      "name": "hand-stop",
+      "selector": "svg.tabler-icon-hand-stop"
+    },
+    {
+      "name": "hash",
+      "selector": "svg.tabler-icon-hash"
+    },
+    {
+      "name": "headphones",
+      "selector": "svg.tabler-icon-headphones"
+    },
+    {
+      "name": "headphones-off",
+      "selector": "svg.tabler-icon-headphones-off"
+    },
+    {
+      "name": "headset",
+      "selector": "svg.tabler-icon-headset"
+    },
+    {
+      "name": "heart",
+      "selector": "svg.tabler-icon-heart"
+    },
+    {
+      "name": "help-circle",
+      "selector": "svg.tabler-icon-help-circle"
+    },
+    {
+      "name": "hourglass",
+      "selector": "svg.tabler-icon-hourglass"
+    },
+    {
+      "name": "id",
+      "selector": "svg.tabler-icon-id"
+    },
+    {
+      "name": "info-circle",
+      "selector": "svg.tabler-icon-info-circle"
+    },
+    {
+      "name": "keyboard",
+      "selector": "svg.tabler-icon-keyboard"
+    },
+    {
+      "name": "layout-navbar-expand",
+      "selector": "svg.tabler-icon-layout-navbar-expand"
+    },
+    {
+      "name": "leaf",
+      "selector": "svg.tabler-icon-leaf"
+    },
+    {
+      "name": "link",
+      "selector": "svg.tabler-icon-link"
+    },
+    {
+      "name": "loader-2",
+      "selector": "svg.tabler-icon-loader-2"
+    },
+    {
+      "name": "logout",
+      "selector": "svg.tabler-icon-logout"
+    },
+    {
+      "name": "maximize",
+      "selector": "svg.tabler-icon-maximize"
+    },
+    {
+      "name": "message-circle",
+      "selector": "svg.tabler-icon-message-circle"
+    },
+    {
+      "name": "message-circle-minus",
+      "selector": "svg.tabler-icon-message-circle-minus"
+    },
+    {
+      "name": "message-filled",
+      "selector": "svg.tabler-icon-message-filled"
+    },
+    {
+      "name": "message-report",
+      "selector": "svg.tabler-icon-message-report"
+    },
+    {
+      "name": "microphone",
+      "selector": "svg.tabler-icon-microphone"
+    },
+    {
+      "name": "microphone-off",
+      "selector": "svg.tabler-icon-microphone-off"
+    },
+    {
+      "name": "minimize",
+      "selector": "svg.tabler-icon-minimize"
+    },
+    {
+      "name": "minus",
+      "selector": "svg.tabler-icon-minus"
+    },
+    {
+      "name": "mood-plus",
+      "selector": "svg.tabler-icon-mood-plus"
+    },
+    {
+      "name": "mood-smile",
+      "selector": "svg.tabler-icon-mood-smile"
+    },
+    {
+      "name": "moon",
+      "selector": "svg.tabler-icon-moon"
+    },
+    {
+      "name": "movie",
+      "selector": "svg.tabler-icon-movie"
+    },
+    {
+      "name": "music",
+      "selector": "svg.tabler-icon-music"
+    },
+    {
+      "name": "network",
+      "selector": "svg.tabler-icon-network"
+    },
+    {
+      "name": "package",
+      "selector": "svg.tabler-icon-package"
+    },
+    {
+      "name": "paperclip",
+      "selector": "svg.tabler-icon-paperclip"
+    },
+    {
+      "name": "pencil",
+      "selector": "svg.tabler-icon-pencil"
+    },
+    {
+      "name": "phone",
+      "selector": "svg.tabler-icon-phone"
+    },
+    {
+      "name": "phone-call",
+      "selector": "svg.tabler-icon-phone-call"
+    },
+    {
+      "name": "phone-off",
+      "selector": "svg.tabler-icon-phone-off"
+    },
+    {
+      "name": "phone-x",
+      "selector": "svg.tabler-icon-phone-x"
+    },
+    {
+      "name": "photo",
+      "selector": "svg.tabler-icon-photo"
+    },
+    {
+      "name": "photo-plus",
+      "selector": "svg.tabler-icon-photo-plus"
+    },
+    {
+      "name": "pin",
+      "selector": "svg.tabler-icon-pin"
+    },
+    {
+      "name": "pinned-off",
+      "selector": "svg.tabler-icon-pinned-off"
+    },
+    {
+      "name": "player-pause-filled",
+      "selector": "svg.tabler-icon-player-pause-filled"
+    },
+    {
+      "name": "player-play",
+      "selector": "svg.tabler-icon-player-play"
+    },
+    {
+      "name": "player-play-filled",
+      "selector": "svg.tabler-icon-player-play-filled"
+    },
+    {
+      "name": "player-skip-forward",
+      "selector": "svg.tabler-icon-player-skip-forward"
+    },
+    {
+      "name": "player-skip-forward-filled",
+      "selector": "svg.tabler-icon-player-skip-forward-filled"
+    },
+    {
+      "name": "player-stop",
+      "selector": "svg.tabler-icon-player-stop"
+    },
+    {
+      "name": "player-stop-filled",
+      "selector": "svg.tabler-icon-player-stop-filled"
+    },
+    {
+      "name": "playlist",
+      "selector": "svg.tabler-icon-playlist"
+    },
+    {
+      "name": "plus",
+      "selector": "svg.tabler-icon-plus"
+    },
+    {
+      "name": "puzzle",
+      "selector": "svg.tabler-icon-puzzle"
+    },
+    {
+      "name": "quote",
+      "selector": "svg.tabler-icon-quote"
+    },
+    {
+      "name": "refresh",
+      "selector": "svg.tabler-icon-refresh"
+    },
+    {
+      "name": "repeat",
+      "selector": "svg.tabler-icon-repeat"
+    },
+    {
+      "name": "repeat-once",
+      "selector": "svg.tabler-icon-repeat-once"
+    },
+    {
+      "name": "rosette-discount-check-filled",
+      "selector": "svg.tabler-icon-rosette-discount-check-filled"
+    },
+    {
+      "name": "run",
+      "selector": "svg.tabler-icon-run"
+    },
+    {
+      "name": "screen-share",
+      "selector": "svg.tabler-icon-screen-share"
+    },
+    {
+      "name": "search",
+      "selector": "svg.tabler-icon-search"
+    },
+    {
+      "name": "send",
+      "selector": "svg.tabler-icon-send"
+    },
+    {
+      "name": "server",
+      "selector": "svg.tabler-icon-server"
+    },
+    {
+      "name": "settings",
+      "selector": "svg.tabler-icon-settings"
+    },
+    {
+      "name": "shield",
+      "selector": "svg.tabler-icon-shield"
+    },
+    {
+      "name": "square-rounded",
+      "selector": "svg.tabler-icon-square-rounded"
+    },
+    {
+      "name": "star",
+      "selector": "svg.tabler-icon-star"
+    },
+    {
+      "name": "star-filled",
+      "selector": "svg.tabler-icon-star-filled"
+    },
+    {
+      "name": "sun",
+      "selector": "svg.tabler-icon-sun"
+    },
+    {
+      "name": "terminal-2",
+      "selector": "svg.tabler-icon-terminal-2"
+    },
+    {
+      "name": "tool",
+      "selector": "svg.tabler-icon-tool"
+    },
+    {
+      "name": "trash",
+      "selector": "svg.tabler-icon-trash"
+    },
+    {
+      "name": "trophy",
+      "selector": "svg.tabler-icon-trophy"
+    },
+    {
+      "name": "user",
+      "selector": "svg.tabler-icon-user"
+    },
+    {
+      "name": "user-circle",
+      "selector": "svg.tabler-icon-user-circle"
+    },
+    {
+      "name": "user-minus",
+      "selector": "svg.tabler-icon-user-minus"
+    },
+    {
+      "name": "user-plus",
+      "selector": "svg.tabler-icon-user-plus"
+    },
+    {
+      "name": "users",
+      "selector": "svg.tabler-icon-users"
+    },
+    {
+      "name": "video",
+      "selector": "svg.tabler-icon-video"
+    },
+    {
+      "name": "video-off",
+      "selector": "svg.tabler-icon-video-off"
+    },
+    {
+      "name": "viewport-tall",
+      "selector": "svg.tabler-icon-viewport-tall"
+    },
+    {
+      "name": "volume",
+      "selector": "svg.tabler-icon-volume"
+    },
+    {
+      "name": "volume-2",
+      "selector": "svg.tabler-icon-volume-2"
+    },
+    {
+      "name": "volume-3",
+      "selector": "svg.tabler-icon-volume-3"
+    },
+    {
+      "name": "volume-off",
+      "selector": "svg.tabler-icon-volume-off"
+    },
+    {
+      "name": "world",
+      "selector": "svg.tabler-icon-world"
+    },
+    {
+      "name": "x",
+      "selector": "svg.tabler-icon-x"
+    },
+    {
+      "name": "zoom-in",
+      "selector": "svg.tabler-icon-zoom-in"
+    },
+    {
+      "name": "zoom-out",
+      "selector": "svg.tabler-icon-zoom-out"
+    },
+    {
+      "name": "zoom-scan",
+      "selector": "svg.tabler-icon-zoom-scan"
     }
   ]
 }
