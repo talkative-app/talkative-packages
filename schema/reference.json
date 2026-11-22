@@ -818,6 +818,10 @@
       "selector": "svg.tabler-icon-info-circle"
     },
     {
+      "name": "key",
+      "selector": "svg.tabler-icon-key"
+    },
+    {
       "name": "keyboard",
       "selector": "svg.tabler-icon-keyboard"
     },

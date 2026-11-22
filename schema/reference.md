@@ -215,6 +215,7 @@ Replace one as `svg.tabler-icon-microphone > * { display: none }` with a backgro
 | `hourglass` | `svg.tabler-icon-hourglass` |
 | `id` | `svg.tabler-icon-id` |
 | `info-circle` | `svg.tabler-icon-info-circle` |
+| `key` | `svg.tabler-icon-key` |
 | `keyboard` | `svg.tabler-icon-keyboard` |
 | `layout-navbar-expand` | `svg.tabler-icon-layout-navbar-expand` |
 | `leaf` | `svg.tabler-icon-leaf` |
