@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "pubg-battlegrounds",
+  "name": "PUBG: Battlegrounds",
+  "category": "competitive",
+  "processes": {
+    "darwin": [],
+    "win32": ["TslGame.exe"],
+    "linux": []
+  }
+}

@@ -14,6 +14,13 @@ Settings → Packages. This repository is the official one; anyone can start the
 To change a package later, raise its `version`. The check refuses a change without one.
 [CONTRIBUTING.md](CONTRIBUTING.md) walks through it.
 
+## Games
+
+`games/<id>.json` lists a game talkative recognises while it runs: its name, its category
+(`competitive`, `together`, `chill`, `story`) and its process names per system. `publish` joins them
+into `games.json` beside `catalog.json`; the check follows `schema/games.schema.json`. A game file
+changes nothing else in the pull request.
+
 ## Read more
 
 | File                                       |                                                                                       |

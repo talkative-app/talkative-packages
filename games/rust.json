@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "rust",
+  "name": "Rust",
+  "category": "together",
+  "processes": {
+    "darwin": ["RustClient"],
+    "win32": ["RustClient.exe"],
+    "linux": ["RustClient"]
+  }
+}

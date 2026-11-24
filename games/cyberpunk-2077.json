@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "cyberpunk-2077",
+  "name": "Cyberpunk 2077",
+  "category": "story",
+  "processes": {
+    "darwin": ["Cyberpunk2077"],
+    "win32": ["Cyberpunk2077.exe"],
+    "linux": []
+  }
+}

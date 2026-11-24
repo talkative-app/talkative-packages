@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "competitive",
+        "together",
+        "chill",
+        "story",
+        "custom"
+      ]
+    },
+    "processes": {
+      "type": "object",
+      "properties": {
+        "darwin": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "win32": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "linux": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "darwin",
+        "win32",
+        "linux"
+      ]
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "league.lobby",
+              "league.preGame",
+              "league.stomping",
+              "league.feeding",
+              "league.lateGame"
+            ]
+          },
+          "moods": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 48
+            }
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    "vibes": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 48
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "category",
+    "processes"
+  ]
+}

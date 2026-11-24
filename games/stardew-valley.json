@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "stardew-valley",
+  "name": "Stardew Valley",
+  "category": "chill",
+  "processes": {
+    "darwin": ["Stardew Valley"],
+    "win32": ["Stardew Valley.exe"],
+    "linux": ["StardewValley"]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "rainbow-six-siege",
+  "name": "Rainbow Six Siege",
+  "category": "competitive",
+  "processes": {
+    "darwin": [],
+    "win32": ["RainbowSix.exe", "RainbowSix_Vulkan.exe"],
+    "linux": []
+  }
+}

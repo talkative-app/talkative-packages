@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "rocket-league",
+  "name": "Rocket League",
+  "category": "competitive",
+  "processes": {
+    "darwin": [],
+    "win32": ["RocketLeague.exe"],
+    "linux": []
+  }
+}

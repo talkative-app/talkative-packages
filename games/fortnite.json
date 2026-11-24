@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "fortnite",
+  "name": "Fortnite",
+  "category": "competitive",
+  "processes": {
+    "darwin": [],
+    "win32": ["FortniteClient-Win64-Shipping.exe"],
+    "linux": []
+  }
+}

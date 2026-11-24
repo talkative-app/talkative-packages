@@ -1,6 +1,7 @@
 import { readdirSync } from 'node:fs';
 import path from 'node:path';
 
+import { GamesFeed } from './lib/games-feed.ts';
 import { gitHistory } from './lib/git-history.ts';
 import { PackageChecker } from './lib/package-checker.ts';
 import { PackageRules } from './lib/package-rules.ts';
@@ -49,6 +50,7 @@ const pullRequestProblems = (): string[] => {
 
 const report = [
   { id: 'repository layout', problems: repositoryLayout.problems(gitHistory.trackedFiles()) },
+  { id: 'games', problems: new GamesFeed().problems() },
   ...(title === undefined ? [] : [{ id: 'pull request', problems: pullRequestProblems() }]),
   ...packageReport,
 ];

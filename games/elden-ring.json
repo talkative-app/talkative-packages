@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "elden-ring",
+  "name": "ELDEN RING",
+  "category": "story",
+  "processes": {
+    "darwin": [],
+    "win32": ["eldenring.exe"],
+    "linux": []
+  }
+}

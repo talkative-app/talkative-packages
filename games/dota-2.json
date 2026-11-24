@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "dota-2",
+  "name": "Dota 2",
+  "category": "competitive",
+  "processes": {
+    "darwin": ["dota2"],
+    "win32": ["dota2.exe"],
+    "linux": ["dota2"]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "among-us",
+  "name": "Among Us",
+  "category": "together",
+  "processes": {
+    "darwin": [],
+    "win32": ["Among Us.exe"],
+    "linux": []
+  }
+}

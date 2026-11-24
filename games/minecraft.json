@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "minecraft",
+  "name": "Minecraft",
+  "category": "together",
+  "processes": {
+    "darwin": [],
+    "win32": ["Minecraft.Windows.exe"],
+    "linux": []
+  }
+}

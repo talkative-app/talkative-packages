@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "terraria",
+  "name": "Terraria",
+  "category": "chill",
+  "processes": {
+    "darwin": [],
+    "win32": ["Terraria.exe"],
+    "linux": ["Terraria.bin.x86_64"]
+  }
+}

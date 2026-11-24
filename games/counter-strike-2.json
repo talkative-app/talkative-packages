@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "counter-strike-2",
+  "name": "Counter-Strike 2",
+  "category": "competitive",
+  "processes": {
+    "darwin": [],
+    "win32": ["cs2.exe"],
+    "linux": ["cs2"]
+  }
+}

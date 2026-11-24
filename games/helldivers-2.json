@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "helldivers-2",
+  "name": "HELLDIVERS 2",
+  "category": "together",
+  "processes": {
+    "darwin": [],
+    "win32": ["helldivers2.exe"],
+    "linux": []
+  }
+}

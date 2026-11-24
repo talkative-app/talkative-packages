@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "overwatch",
+  "name": "Overwatch",
+  "category": "competitive",
+  "processes": {
+    "darwin": [],
+    "win32": ["Overwatch.exe"],
+    "linux": []
+  }
+}

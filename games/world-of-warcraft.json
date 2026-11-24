@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "world-of-warcraft",
+  "name": "World of Warcraft",
+  "category": "together",
+  "processes": {
+    "darwin": ["World of Warcraft"],
+    "win32": ["Wow.exe"],
+    "linux": []
+  }
+}

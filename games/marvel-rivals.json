@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/games.schema.json",
+  "id": "marvel-rivals",
+  "name": "Marvel Rivals",
+  "category": "competitive",
+  "processes": {
+    "darwin": [],
+    "win32": ["Marvel-Win64-Shipping.exe"],
+    "linux": []
+  }
+}
