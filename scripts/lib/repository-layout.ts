@@ -5,6 +5,7 @@ const ROOT_ENTRIES = new Set([
   'CONTRIBUTING.md',
   'GUIDE.md',
   'README.md',
+  'games',
   'package-lock.json',
   'package.json',
   'packages',

@@ -2,6 +2,7 @@ import { cpSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 import { CatalogBuilder } from './lib/catalog-builder.ts';
+import { GamesFeed } from './lib/games-feed.ts';
 import { gitHistory } from './lib/git-history.ts';
 
 const root = path.resolve(import.meta.dirname, '..');
@@ -30,4 +31,7 @@ const catalog = builder.build({
   folders,
 });
 writeFileSync(path.join(dist, 'catalog.json'), `${JSON.stringify(catalog, null, 2)}\n`);
+const games = new GamesFeed().build();
+writeFileSync(path.join(dist, 'games.json'), `${JSON.stringify(games, null, 2)}\n`);
+console.log(`games.json lists ${String(games.games.length)} games`);
 console.log(`catalog.json lists ${String(folders.length)} packages under ${base}`);
