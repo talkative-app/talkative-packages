@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
 import Ajv2020, { type ErrorObject, type ValidateFunction } from 'ajv/dist/2020.js';
@@ -62,6 +62,8 @@ export class GamesFeed {
   }
 
   #read(folder: string): { file: string; value: unknown }[] {
+    if (!existsSync(folder)) return [];
+
     return readdirSync(folder)
       .filter((file) => file.endsWith('.json'))
       .sort()

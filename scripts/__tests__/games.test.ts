@@ -1,19 +1,14 @@
 import assert from 'node:assert/strict';
-import { cpSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { describe, it } from 'node:test';
 
-import { GAMES_FOLDER, GamesFeed } from '../lib/games-feed.ts';
+import { GamesFeed } from '../lib/games-feed.ts';
 
 describe('games', () => {
   const feed = new GamesFeed();
-  const copy = (): string => {
-    const folder = mkdtempSync(path.join(tmpdir(), 'games-'));
-    cpSync(GAMES_FOLDER, folder, { recursive: true });
-
-    return folder;
-  };
+  const copy = (): string => mkdtempSync(path.join(tmpdir(), 'games-'));
   const game = {
     id: 'doe-arena',
     name: 'Doe Arena',
@@ -41,23 +36,22 @@ describe('games', () => {
     writeFileSync(path.join(folder, 'doe.json'), JSON.stringify(game));
     writeFileSync(
       path.join(folder, 'jane-arena.json'),
-      JSON.stringify({
-        ...game,
-        id: 'jane-arena',
-        processes: { ...game.processes, win32: ['cs2.exe'] },
-      }),
+      JSON.stringify({ ...game, id: 'jane-arena' }),
     );
     const problems = feed.problems(folder).join('\n');
     assert.match(problems, /doe\.json: the file is named doe\.json but the game id is doe-arena/);
     assert.match(
       problems,
-      /jane-arena\.json: cs2\.exe on win32 is already counter-strike-2's process/,
+      /jane-arena\.json: DoeArena\.exe on win32 is already doe-arena's process/,
     );
   });
 
   it('The feed lists every game without its editor schema link', () => {
-    const { games } = feed.build();
-    assert.ok(games.length > 0);
-    assert.ok(games.every((entry) => !Object.hasOwn(Object(entry), '$schema')));
+    const folder = copy();
+    writeFileSync(
+      path.join(folder, 'doe-arena.json'),
+      JSON.stringify({ $schema: '../schema/games.schema.json', ...game }),
+    );
+    assert.deepEqual(feed.build(folder), { games: [game] });
   });
 });
